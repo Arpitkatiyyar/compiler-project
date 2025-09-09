@@ -1,0 +1,13 @@
+cpp_to_python/
+│── lexer.py           # Lexical analyzer (tokenizer)
+│── parser.py          # Grammar + parser (builds AST)
+│── ast_nodes.py       # Classes for AST representation
+│── codegen.py         # Translates AST → Python code
+│── main.py            # Entry point (driver script)
+│── tests/
+│   ├── test1.cpp      # Example C++ program
+│   ├── test2.cpp
+│   └── expected/      # Expected Python outputs (for testing)
+│── docs/
+│   ├── grammar.txt    # Your CFG rules
+│   └── report.md      # Documentation for lab submission
