@@ -6,8 +6,29 @@ from ast_nodes import *
 # Grammar Rules
 # ------------------------------
 def p_program(p):
-    'program : statement_list'
-    p[0] = ProgramNode(p[1])
+    '''program : includes using_namespace main_function'''
+    p[0] = ProgramNode(p[3].statements)
+
+def p_includes(p):
+    '''includes : INCLUDE
+                | empty'''
+    p[0] = None
+
+def p_using_namespace(p):
+    '''using_namespace : USING NAMESPACE STD SEMICOLON
+                       | empty'''
+    p[0] = None
+
+def p_main_function(p):
+    'main_function : INT MAIN LPAREN RPAREN block'
+    p[0] = p[5]   # block returns a BlockNode
+
+# ------------------------------
+# Block
+# ------------------------------
+def p_block(p):
+    'block : LBRACE statement_list RBRACE'
+    p[0] = BlockNode(p[2])
 
 def p_statement_list(p):
     '''statement_list : statement
@@ -58,8 +79,8 @@ def p_statement_for(p):
     p[0] = ForNode(init, cond, incr, body)
 
 def p_statement_block(p):
-    'statement : LBRACE statement_list RBRACE'
-    p[0] = BlockNode(p[2])
+    'statement : block'
+    p[0] = p[1]
 
 # ------------------------------
 # Assignments inside for-loop
@@ -98,6 +119,13 @@ def p_expression_paren(p):
 def p_expression_string(p):
     'expression : STRING_LITERAL'
     p[0] = StringNode(p[1])
+
+# ------------------------------
+# Empty rule
+# ------------------------------
+def p_empty(p):
+    'empty :'
+    pass
 
 # ------------------------------
 # Error Handling
