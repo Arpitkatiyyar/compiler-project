@@ -4,12 +4,13 @@ import ply.lex as lex
 # Tokens
 # ------------------------------
 tokens = [
-    'ID', 'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'MOD',  # Added MOD
+    'ID', 'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'MOD',
     'LT', 'GT', 'EQ', 'NEQ',
     'ASSIGN', 'SEMICOLON', 'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',
     'STRING_LITERAL',
     # Keywords
-    'INT', 'FLOAT', 'STRING', 'COUT', 'IF', 'ELSE', 'WHILE', 'FOR'
+    'INT', 'FLOAT', 'STRING', 'COUT', 'IF', 'ELSE', 'WHILE', 'FOR',
+    'INCLUDE', 'USING', 'NAMESPACE', 'STD', 'MAIN'
 ]
 
 # ------------------------------
@@ -23,7 +24,11 @@ reserved = {
     'if': 'IF',
     'else': 'ELSE',
     'while': 'WHILE',
-    'for': 'FOR'
+    'for': 'FOR',
+    'using': 'USING',
+    'namespace': 'NAMESPACE',
+    'std': 'STD',
+    'main': 'MAIN'
 }
 
 # ------------------------------
@@ -33,7 +38,7 @@ t_PLUS  = r'\+'
 t_MINUS = r'-'
 t_MULT  = r'\*'
 t_DIV   = r'/'
-t_MOD   = r'%'        # Added MOD
+t_MOD   = r'%'
 t_LT    = r'<'
 t_GT    = r'>'
 t_EQ    = r'=='
@@ -44,6 +49,12 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_LBRACE = r'\{'
 t_RBRACE = r'\}'
+
+# Match #include <iostream>
+def t_INCLUDE(t):
+    r'\#include\s*<iostream>'
+    t.value = "iostream"
+    return t
 
 # String literal
 def t_STRING_LITERAL(t):
@@ -75,6 +86,15 @@ def t_newline(t):
 def t_error(t):
     print(f"Illegal character '{t.value[0]}' at line {t.lineno}")
     t.lexer.skip(1)
+# Single-line comment (C++ style // ...)
+def t_comment_singleline(t):
+    r'//.*'
+    pass  # ignore comment
+
+# Multi-line comment (C style /* ... */)
+def t_comment_multiline(t):
+    r'/\*([^*]|\*+[^*/])*\*+/'
+    pass  # ignore comment
 
 # Build lexer
 lexer = lex.lex()

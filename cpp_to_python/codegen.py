@@ -5,7 +5,7 @@ class CodeGenerator:
         self.indent_level = 0
 
     def indent(self):
-        return "    " * self.indent_level  # 4 spaces per level
+        return "    " * self.indent_level
 
     def generate(self, node):
         if isinstance(node, ProgramNode):
@@ -34,17 +34,15 @@ class CodeGenerator:
             return code
 
         elif isinstance(node, ForNode):
-            # Only handles standard numeric for-loops like: for(int i=0; i<x; i=i+1)
             init = node.init
             cond = node.cond
             incr = node.incr
-
             start = self.generate(init.value)
 
             if isinstance(cond, BinOpNode) and cond.op == "<":
                 stop = self.generate(cond.right)
             else:
-                stop = "??"  # fallback if condition not supported
+                stop = "??"
 
             step = 1
             if isinstance(incr.value, BinOpNode) and incr.value.op == "+":
@@ -72,6 +70,20 @@ class CodeGenerator:
 # ------------------------------
 # Main for testing
 # ------------------------------
+# if __name__ == "__main__":
+#     from parser import parser
+#     with open("test.cpp", "r") as f:
+#         data = f.read()
+#     ast = parser.parse(f.read())
+#     print("AST:", ast)
+
+#     gen = CodeGenerator()
+#     py_code = gen.generate(ast)
+#     print("\nGenerated Python code:\n")
+#     print(py_code)
+# ------------------------------
+# Main for testing
+# ------------------------------
 if __name__ == "__main__":
     from parser import parser
     with open("test.cpp", "r") as f:
@@ -83,3 +95,4 @@ if __name__ == "__main__":
     py_code = gen.generate(ast)
     print("\nGenerated Python code:\n")
     print(py_code)
+

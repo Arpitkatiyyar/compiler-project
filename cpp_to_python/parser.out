@@ -3,104 +3,106 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> program
-Rule 1     program -> statement_list
-Rule 2     statement_list -> statement
-Rule 3     statement_list -> statement_list statement
-Rule 4     statement -> INT ID ASSIGN expression SEMICOLON
-Rule 5     statement -> FLOAT ID ASSIGN expression SEMICOLON
-Rule 6     statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON
-Rule 7     statement -> ID ASSIGN expression SEMICOLON
-Rule 8     statement -> COUT LT LT expression SEMICOLON
-Rule 9     statement -> IF LPAREN expression RPAREN statement
-Rule 10    statement -> IF LPAREN expression RPAREN statement ELSE statement
-Rule 11    statement -> WHILE LPAREN expression RPAREN statement
-Rule 12    statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-Rule 13    statement -> LBRACE statement_list RBRACE
-Rule 14    assignment -> ID ASSIGN expression
-Rule 15    expression -> expression PLUS expression
-Rule 16    expression -> expression MINUS expression
-Rule 17    expression -> expression MULT expression
-Rule 18    expression -> expression DIV expression
-Rule 19    expression -> expression MOD expression
-Rule 20    expression -> expression LT expression
-Rule 21    expression -> expression GT expression
-Rule 22    expression -> expression EQ expression
-Rule 23    expression -> expression NEQ expression
-Rule 24    expression -> NUMBER
-Rule 25    expression -> ID
-Rule 26    expression -> LPAREN expression RPAREN
-Rule 27    expression -> STRING_LITERAL
+Rule 1     program -> includes using_namespace main_function
+Rule 2     includes -> INCLUDE
+Rule 3     includes -> empty
+Rule 4     using_namespace -> USING NAMESPACE STD SEMICOLON
+Rule 5     using_namespace -> empty
+Rule 6     main_function -> INT MAIN LPAREN RPAREN block
+Rule 7     block -> LBRACE statement_list RBRACE
+Rule 8     statement_list -> statement
+Rule 9     statement_list -> statement_list statement
+Rule 10    statement -> INT ID ASSIGN expression SEMICOLON
+Rule 11    statement -> FLOAT ID ASSIGN expression SEMICOLON
+Rule 12    statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON
+Rule 13    statement -> ID ASSIGN expression SEMICOLON
+Rule 14    statement -> COUT LT LT expression SEMICOLON
+Rule 15    statement -> IF LPAREN expression RPAREN statement
+Rule 16    statement -> IF LPAREN expression RPAREN statement ELSE statement
+Rule 17    statement -> WHILE LPAREN expression RPAREN statement
+Rule 18    statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+Rule 19    statement -> block
+Rule 20    assignment -> ID ASSIGN expression
+Rule 21    expression -> expression PLUS expression
+Rule 22    expression -> expression MINUS expression
+Rule 23    expression -> expression MULT expression
+Rule 24    expression -> expression DIV expression
+Rule 25    expression -> expression MOD expression
+Rule 26    expression -> expression LT expression
+Rule 27    expression -> expression GT expression
+Rule 28    expression -> expression EQ expression
+Rule 29    expression -> expression NEQ expression
+Rule 30    expression -> NUMBER
+Rule 31    expression -> ID
+Rule 32    expression -> LPAREN expression RPAREN
+Rule 33    expression -> STRING_LITERAL
+Rule 34    empty -> <empty>
 
 Terminals, with rules where they appear
 
-ASSIGN               : 4 5 6 7 12 14
-COUT                 : 8
-DIV                  : 18
-ELSE                 : 10
-EQ                   : 22
-FLOAT                : 5
-FOR                  : 12
-GT                   : 21
-ID                   : 4 5 6 7 12 14 25
-IF                   : 9 10
-INT                  : 4 12
-LBRACE               : 13
-LPAREN               : 9 10 11 12 26
-LT                   : 8 8 20
-MINUS                : 16
-MOD                  : 19
-MULT                 : 17
-NEQ                  : 23
-NUMBER               : 24
-PLUS                 : 15
-RBRACE               : 13
-RPAREN               : 9 10 11 12 26
-SEMICOLON            : 4 5 6 7 8 12 12
-STRING               : 6
-STRING_LITERAL       : 6 27
-WHILE                : 11
+ASSIGN               : 10 11 12 13 18 20
+COUT                 : 14
+DIV                  : 24
+ELSE                 : 16
+EQ                   : 28
+FLOAT                : 11
+FOR                  : 18
+GT                   : 27
+ID                   : 10 11 12 13 18 20 31
+IF                   : 15 16
+INCLUDE              : 2
+INT                  : 6 10 18
+LBRACE               : 7
+LPAREN               : 6 15 16 17 18 32
+LT                   : 14 14 26
+MAIN                 : 6
+MINUS                : 22
+MOD                  : 25
+MULT                 : 23
+NAMESPACE            : 4
+NEQ                  : 29
+NUMBER               : 30
+PLUS                 : 21
+RBRACE               : 7
+RPAREN               : 6 15 16 17 18 32
+SEMICOLON            : 4 10 11 12 13 14 18 18
+STD                  : 4
+STRING               : 12
+STRING_LITERAL       : 12 33
+USING                : 4
+WHILE                : 17
 error                : 
 
 Nonterminals, with rules where they appear
 
-assignment           : 12
-expression           : 4 5 7 8 9 10 11 12 12 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 26
+assignment           : 18
+block                : 6 19
+empty                : 3 5
+expression           : 10 11 13 14 15 16 17 18 18 20 21 21 22 22 23 23 24 24 25 25 26 26 27 27 28 28 29 29 32
+includes             : 1
+main_function        : 1
 program              : 0
-statement            : 2 3 9 10 10 11 12
-statement_list       : 1 3 13
+statement            : 8 9 15 16 16 17 18
+statement_list       : 7 9
+using_namespace      : 1
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . program
-    (1) program -> . statement_list
-    (2) statement_list -> . statement
-    (3) statement_list -> . statement_list statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (1) program -> . includes using_namespace main_function
+    (2) includes -> . INCLUDE
+    (3) includes -> . empty
+    (34) empty -> .
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    INCLUDE         shift and go to state 3
+    USING           reduce using rule 34 (empty -> .)
+    INT             reduce using rule 34 (empty -> .)
 
     program                        shift and go to state 1
-    statement_list                 shift and go to state 2
-    statement                      shift and go to state 3
+    includes                       shift and go to state 2
+    empty                          shift and go to state 4
 
 state 1
 
@@ -110,1334 +112,1084 @@ state 1
 
 state 2
 
-    (1) program -> statement_list .
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (1) program -> includes . using_namespace main_function
+    (4) using_namespace -> . USING NAMESPACE STD SEMICOLON
+    (5) using_namespace -> . empty
+    (34) empty -> .
 
-    $end            reduce using rule 1 (program -> statement_list .)
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    USING           shift and go to state 6
+    INT             reduce using rule 34 (empty -> .)
 
-    statement                      shift and go to state 13
+    using_namespace                shift and go to state 5
+    empty                          shift and go to state 7
 
 state 3
 
-    (2) statement_list -> statement .
+    (2) includes -> INCLUDE .
 
-    INT             reduce using rule 2 (statement_list -> statement .)
-    FLOAT           reduce using rule 2 (statement_list -> statement .)
-    STRING          reduce using rule 2 (statement_list -> statement .)
-    ID              reduce using rule 2 (statement_list -> statement .)
-    COUT            reduce using rule 2 (statement_list -> statement .)
-    IF              reduce using rule 2 (statement_list -> statement .)
-    WHILE           reduce using rule 2 (statement_list -> statement .)
-    FOR             reduce using rule 2 (statement_list -> statement .)
-    LBRACE          reduce using rule 2 (statement_list -> statement .)
-    $end            reduce using rule 2 (statement_list -> statement .)
-    RBRACE          reduce using rule 2 (statement_list -> statement .)
+    USING           reduce using rule 2 (includes -> INCLUDE .)
+    INT             reduce using rule 2 (includes -> INCLUDE .)
 
 
 state 4
 
-    (4) statement -> INT . ID ASSIGN expression SEMICOLON
+    (3) includes -> empty .
 
-    ID              shift and go to state 14
+    USING           reduce using rule 3 (includes -> empty .)
+    INT             reduce using rule 3 (includes -> empty .)
 
 
 state 5
 
-    (7) statement -> ID . ASSIGN expression SEMICOLON
+    (1) program -> includes using_namespace . main_function
+    (6) main_function -> . INT MAIN LPAREN RPAREN block
 
-    ASSIGN          shift and go to state 15
+    INT             shift and go to state 9
 
+    main_function                  shift and go to state 8
 
 state 6
 
-    (5) statement -> FLOAT . ID ASSIGN expression SEMICOLON
+    (4) using_namespace -> USING . NAMESPACE STD SEMICOLON
 
-    ID              shift and go to state 16
+    NAMESPACE       shift and go to state 10
 
 
 state 7
 
-    (6) statement -> STRING . ID ASSIGN STRING_LITERAL SEMICOLON
+    (5) using_namespace -> empty .
 
-    ID              shift and go to state 17
+    INT             reduce using rule 5 (using_namespace -> empty .)
 
 
 state 8
 
-    (8) statement -> COUT . LT LT expression SEMICOLON
+    (1) program -> includes using_namespace main_function .
 
-    LT              shift and go to state 18
+    $end            reduce using rule 1 (program -> includes using_namespace main_function .)
 
 
 state 9
 
-    (9) statement -> IF . LPAREN expression RPAREN statement
-    (10) statement -> IF . LPAREN expression RPAREN statement ELSE statement
+    (6) main_function -> INT . MAIN LPAREN RPAREN block
 
-    LPAREN          shift and go to state 19
+    MAIN            shift and go to state 11
 
 
 state 10
 
-    (11) statement -> WHILE . LPAREN expression RPAREN statement
+    (4) using_namespace -> USING NAMESPACE . STD SEMICOLON
 
-    LPAREN          shift and go to state 20
+    STD             shift and go to state 12
 
 
 state 11
 
-    (12) statement -> FOR . LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (6) main_function -> INT MAIN . LPAREN RPAREN block
 
-    LPAREN          shift and go to state 21
+    LPAREN          shift and go to state 13
 
 
 state 12
 
-    (13) statement -> LBRACE . statement_list RBRACE
-    (2) statement_list -> . statement
-    (3) statement_list -> . statement_list statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (4) using_namespace -> USING NAMESPACE STD . SEMICOLON
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    SEMICOLON       shift and go to state 14
 
-    statement_list                 shift and go to state 22
-    statement                      shift and go to state 3
 
 state 13
 
-    (3) statement_list -> statement_list statement .
+    (6) main_function -> INT MAIN LPAREN . RPAREN block
 
-    INT             reduce using rule 3 (statement_list -> statement_list statement .)
-    FLOAT           reduce using rule 3 (statement_list -> statement_list statement .)
-    STRING          reduce using rule 3 (statement_list -> statement_list statement .)
-    ID              reduce using rule 3 (statement_list -> statement_list statement .)
-    COUT            reduce using rule 3 (statement_list -> statement_list statement .)
-    IF              reduce using rule 3 (statement_list -> statement_list statement .)
-    WHILE           reduce using rule 3 (statement_list -> statement_list statement .)
-    FOR             reduce using rule 3 (statement_list -> statement_list statement .)
-    LBRACE          reduce using rule 3 (statement_list -> statement_list statement .)
-    $end            reduce using rule 3 (statement_list -> statement_list statement .)
-    RBRACE          reduce using rule 3 (statement_list -> statement_list statement .)
+    RPAREN          shift and go to state 15
 
 
 state 14
 
-    (4) statement -> INT ID . ASSIGN expression SEMICOLON
+    (4) using_namespace -> USING NAMESPACE STD SEMICOLON .
 
-    ASSIGN          shift and go to state 23
+    INT             reduce using rule 4 (using_namespace -> USING NAMESPACE STD SEMICOLON .)
 
 
 state 15
 
-    (7) statement -> ID ASSIGN . expression SEMICOLON
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (6) main_function -> INT MAIN LPAREN RPAREN . block
+    (7) block -> . LBRACE statement_list RBRACE
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    LBRACE          shift and go to state 17
 
-    expression                     shift and go to state 25
+    block                          shift and go to state 16
 
 state 16
 
-    (5) statement -> FLOAT ID . ASSIGN expression SEMICOLON
+    (6) main_function -> INT MAIN LPAREN RPAREN block .
 
-    ASSIGN          shift and go to state 29
+    $end            reduce using rule 6 (main_function -> INT MAIN LPAREN RPAREN block .)
 
 
 state 17
 
-    (6) statement -> STRING ID . ASSIGN STRING_LITERAL SEMICOLON
+    (7) block -> LBRACE . statement_list RBRACE
+    (8) statement_list -> . statement
+    (9) statement_list -> . statement_list statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
 
-    ASSIGN          shift and go to state 30
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
 
+    statement_list                 shift and go to state 18
+    statement                      shift and go to state 19
+    block                          shift and go to state 28
 
 state 18
 
-    (8) statement -> COUT LT . LT expression SEMICOLON
+    (7) block -> LBRACE statement_list . RBRACE
+    (9) statement_list -> statement_list . statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
 
-    LT              shift and go to state 31
+    RBRACE          shift and go to state 29
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
 
+    statement                      shift and go to state 30
+    block                          shift and go to state 28
 
 state 19
 
-    (9) statement -> IF LPAREN . expression RPAREN statement
-    (10) statement -> IF LPAREN . expression RPAREN statement ELSE statement
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (8) statement_list -> statement .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    RBRACE          reduce using rule 8 (statement_list -> statement .)
+    INT             reduce using rule 8 (statement_list -> statement .)
+    FLOAT           reduce using rule 8 (statement_list -> statement .)
+    STRING          reduce using rule 8 (statement_list -> statement .)
+    ID              reduce using rule 8 (statement_list -> statement .)
+    COUT            reduce using rule 8 (statement_list -> statement .)
+    IF              reduce using rule 8 (statement_list -> statement .)
+    WHILE           reduce using rule 8 (statement_list -> statement .)
+    FOR             reduce using rule 8 (statement_list -> statement .)
+    LBRACE          reduce using rule 8 (statement_list -> statement .)
 
-    expression                     shift and go to state 32
 
 state 20
 
-    (11) statement -> WHILE LPAREN . expression RPAREN statement
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (10) statement -> INT . ID ASSIGN expression SEMICOLON
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    ID              shift and go to state 31
 
-    expression                     shift and go to state 33
 
 state 21
 
-    (12) statement -> FOR LPAREN . INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (13) statement -> ID . ASSIGN expression SEMICOLON
 
-    INT             shift and go to state 34
+    ASSIGN          shift and go to state 32
 
 
 state 22
 
-    (13) statement -> LBRACE statement_list . RBRACE
-    (3) statement_list -> statement_list . statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (11) statement -> FLOAT . ID ASSIGN expression SEMICOLON
 
-    RBRACE          shift and go to state 35
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    ID              shift and go to state 33
 
-    statement                      shift and go to state 13
 
 state 23
 
-    (4) statement -> INT ID ASSIGN . expression SEMICOLON
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (12) statement -> STRING . ID ASSIGN STRING_LITERAL SEMICOLON
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    ID              shift and go to state 34
 
-    expression                     shift and go to state 36
 
 state 24
 
-    (25) expression -> ID .
+    (14) statement -> COUT . LT LT expression SEMICOLON
 
-    SEMICOLON       reduce using rule 25 (expression -> ID .)
-    PLUS            reduce using rule 25 (expression -> ID .)
-    MINUS           reduce using rule 25 (expression -> ID .)
-    MULT            reduce using rule 25 (expression -> ID .)
-    DIV             reduce using rule 25 (expression -> ID .)
-    MOD             reduce using rule 25 (expression -> ID .)
-    LT              reduce using rule 25 (expression -> ID .)
-    GT              reduce using rule 25 (expression -> ID .)
-    EQ              reduce using rule 25 (expression -> ID .)
-    NEQ             reduce using rule 25 (expression -> ID .)
-    RPAREN          reduce using rule 25 (expression -> ID .)
+    LT              shift and go to state 35
 
 
 state 25
 
-    (7) statement -> ID ASSIGN expression . SEMICOLON
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (15) statement -> IF . LPAREN expression RPAREN statement
+    (16) statement -> IF . LPAREN expression RPAREN statement ELSE statement
 
-    SEMICOLON       shift and go to state 37
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    LPAREN          shift and go to state 36
 
 
 state 26
 
-    (24) expression -> NUMBER .
+    (17) statement -> WHILE . LPAREN expression RPAREN statement
 
-    SEMICOLON       reduce using rule 24 (expression -> NUMBER .)
-    PLUS            reduce using rule 24 (expression -> NUMBER .)
-    MINUS           reduce using rule 24 (expression -> NUMBER .)
-    MULT            reduce using rule 24 (expression -> NUMBER .)
-    DIV             reduce using rule 24 (expression -> NUMBER .)
-    MOD             reduce using rule 24 (expression -> NUMBER .)
-    LT              reduce using rule 24 (expression -> NUMBER .)
-    GT              reduce using rule 24 (expression -> NUMBER .)
-    EQ              reduce using rule 24 (expression -> NUMBER .)
-    NEQ             reduce using rule 24 (expression -> NUMBER .)
-    RPAREN          reduce using rule 24 (expression -> NUMBER .)
+    LPAREN          shift and go to state 37
 
 
 state 27
 
-    (26) expression -> LPAREN . expression RPAREN
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (18) statement -> FOR . LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    LPAREN          shift and go to state 38
 
-    expression                     shift and go to state 47
 
 state 28
 
-    (27) expression -> STRING_LITERAL .
+    (19) statement -> block .
 
-    SEMICOLON       reduce using rule 27 (expression -> STRING_LITERAL .)
-    PLUS            reduce using rule 27 (expression -> STRING_LITERAL .)
-    MINUS           reduce using rule 27 (expression -> STRING_LITERAL .)
-    MULT            reduce using rule 27 (expression -> STRING_LITERAL .)
-    DIV             reduce using rule 27 (expression -> STRING_LITERAL .)
-    MOD             reduce using rule 27 (expression -> STRING_LITERAL .)
-    LT              reduce using rule 27 (expression -> STRING_LITERAL .)
-    GT              reduce using rule 27 (expression -> STRING_LITERAL .)
-    EQ              reduce using rule 27 (expression -> STRING_LITERAL .)
-    NEQ             reduce using rule 27 (expression -> STRING_LITERAL .)
-    RPAREN          reduce using rule 27 (expression -> STRING_LITERAL .)
+    RBRACE          reduce using rule 19 (statement -> block .)
+    INT             reduce using rule 19 (statement -> block .)
+    FLOAT           reduce using rule 19 (statement -> block .)
+    STRING          reduce using rule 19 (statement -> block .)
+    ID              reduce using rule 19 (statement -> block .)
+    COUT            reduce using rule 19 (statement -> block .)
+    IF              reduce using rule 19 (statement -> block .)
+    WHILE           reduce using rule 19 (statement -> block .)
+    FOR             reduce using rule 19 (statement -> block .)
+    LBRACE          reduce using rule 19 (statement -> block .)
+    ELSE            reduce using rule 19 (statement -> block .)
 
 
 state 29
 
-    (5) statement -> FLOAT ID ASSIGN . expression SEMICOLON
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (7) block -> LBRACE statement_list RBRACE .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    $end            reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    RBRACE          reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    INT             reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    FLOAT           reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    STRING          reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    ID              reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    COUT            reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    IF              reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    WHILE           reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    LBRACE          reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
+    ELSE            reduce using rule 7 (block -> LBRACE statement_list RBRACE .)
 
-    expression                     shift and go to state 48
 
 state 30
 
-    (6) statement -> STRING ID ASSIGN . STRING_LITERAL SEMICOLON
+    (9) statement_list -> statement_list statement .
 
-    STRING_LITERAL  shift and go to state 49
+    RBRACE          reduce using rule 9 (statement_list -> statement_list statement .)
+    INT             reduce using rule 9 (statement_list -> statement_list statement .)
+    FLOAT           reduce using rule 9 (statement_list -> statement_list statement .)
+    STRING          reduce using rule 9 (statement_list -> statement_list statement .)
+    ID              reduce using rule 9 (statement_list -> statement_list statement .)
+    COUT            reduce using rule 9 (statement_list -> statement_list statement .)
+    IF              reduce using rule 9 (statement_list -> statement_list statement .)
+    WHILE           reduce using rule 9 (statement_list -> statement_list statement .)
+    FOR             reduce using rule 9 (statement_list -> statement_list statement .)
+    LBRACE          reduce using rule 9 (statement_list -> statement_list statement .)
 
 
 state 31
 
-    (8) statement -> COUT LT LT . expression SEMICOLON
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (10) statement -> INT ID . ASSIGN expression SEMICOLON
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    ASSIGN          shift and go to state 39
 
-    expression                     shift and go to state 50
 
 state 32
 
-    (9) statement -> IF LPAREN expression . RPAREN statement
-    (10) statement -> IF LPAREN expression . RPAREN statement ELSE statement
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (13) statement -> ID ASSIGN . expression SEMICOLON
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    RPAREN          shift and go to state 51
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 41
 
 state 33
 
-    (11) statement -> WHILE LPAREN expression . RPAREN statement
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (11) statement -> FLOAT ID . ASSIGN expression SEMICOLON
 
-    RPAREN          shift and go to state 52
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    ASSIGN          shift and go to state 45
 
 
 state 34
 
-    (12) statement -> FOR LPAREN INT . ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (12) statement -> STRING ID . ASSIGN STRING_LITERAL SEMICOLON
 
-    ID              shift and go to state 53
+    ASSIGN          shift and go to state 46
 
 
 state 35
 
-    (13) statement -> LBRACE statement_list RBRACE .
+    (14) statement -> COUT LT . LT expression SEMICOLON
 
-    INT             reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    FLOAT           reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    STRING          reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    ID              reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    COUT            reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    IF              reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    WHILE           reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    FOR             reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    LBRACE          reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    $end            reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    RBRACE          reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
-    ELSE            reduce using rule 13 (statement -> LBRACE statement_list RBRACE .)
+    LT              shift and go to state 47
 
 
 state 36
 
-    (4) statement -> INT ID ASSIGN expression . SEMICOLON
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (15) statement -> IF LPAREN . expression RPAREN statement
+    (16) statement -> IF LPAREN . expression RPAREN statement ELSE statement
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    SEMICOLON       shift and go to state 54
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 48
 
 state 37
 
-    (7) statement -> ID ASSIGN expression SEMICOLON .
+    (17) statement -> WHILE LPAREN . expression RPAREN statement
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    INT             reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    FLOAT           reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    STRING          reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    ID              reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    COUT            reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    IF              reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    WHILE           reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    FOR             reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    LBRACE          reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    $end            reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    RBRACE          reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
-    ELSE            reduce using rule 7 (statement -> ID ASSIGN expression SEMICOLON .)
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 49
 
 state 38
 
-    (15) expression -> expression PLUS . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (18) statement -> FOR LPAREN . INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    INT             shift and go to state 50
 
-    expression                     shift and go to state 55
 
 state 39
 
-    (16) expression -> expression MINUS . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (10) statement -> INT ID ASSIGN . expression SEMICOLON
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-    expression                     shift and go to state 56
+    expression                     shift and go to state 51
 
 state 40
 
-    (17) expression -> expression MULT . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (31) expression -> ID .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    SEMICOLON       reduce using rule 31 (expression -> ID .)
+    PLUS            reduce using rule 31 (expression -> ID .)
+    MINUS           reduce using rule 31 (expression -> ID .)
+    MULT            reduce using rule 31 (expression -> ID .)
+    DIV             reduce using rule 31 (expression -> ID .)
+    MOD             reduce using rule 31 (expression -> ID .)
+    LT              reduce using rule 31 (expression -> ID .)
+    GT              reduce using rule 31 (expression -> ID .)
+    EQ              reduce using rule 31 (expression -> ID .)
+    NEQ             reduce using rule 31 (expression -> ID .)
+    RPAREN          reduce using rule 31 (expression -> ID .)
 
-    expression                     shift and go to state 57
 
 state 41
 
-    (18) expression -> expression DIV . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (13) statement -> ID ASSIGN expression . SEMICOLON
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    SEMICOLON       shift and go to state 52
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-    expression                     shift and go to state 58
 
 state 42
 
-    (19) expression -> expression MOD . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (30) expression -> NUMBER .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    SEMICOLON       reduce using rule 30 (expression -> NUMBER .)
+    PLUS            reduce using rule 30 (expression -> NUMBER .)
+    MINUS           reduce using rule 30 (expression -> NUMBER .)
+    MULT            reduce using rule 30 (expression -> NUMBER .)
+    DIV             reduce using rule 30 (expression -> NUMBER .)
+    MOD             reduce using rule 30 (expression -> NUMBER .)
+    LT              reduce using rule 30 (expression -> NUMBER .)
+    GT              reduce using rule 30 (expression -> NUMBER .)
+    EQ              reduce using rule 30 (expression -> NUMBER .)
+    NEQ             reduce using rule 30 (expression -> NUMBER .)
+    RPAREN          reduce using rule 30 (expression -> NUMBER .)
 
-    expression                     shift and go to state 59
 
 state 43
 
-    (20) expression -> expression LT . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (32) expression -> LPAREN . expression RPAREN
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
-
-    expression                     shift and go to state 60
-
-state 44
-
-    (21) expression -> expression GT . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
-
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
-
-    expression                     shift and go to state 61
-
-state 45
-
-    (22) expression -> expression EQ . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
-
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
     expression                     shift and go to state 62
 
-state 46
+state 44
 
-    (23) expression -> expression NEQ . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (33) expression -> STRING_LITERAL .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    SEMICOLON       reduce using rule 33 (expression -> STRING_LITERAL .)
+    PLUS            reduce using rule 33 (expression -> STRING_LITERAL .)
+    MINUS           reduce using rule 33 (expression -> STRING_LITERAL .)
+    MULT            reduce using rule 33 (expression -> STRING_LITERAL .)
+    DIV             reduce using rule 33 (expression -> STRING_LITERAL .)
+    MOD             reduce using rule 33 (expression -> STRING_LITERAL .)
+    LT              reduce using rule 33 (expression -> STRING_LITERAL .)
+    GT              reduce using rule 33 (expression -> STRING_LITERAL .)
+    EQ              reduce using rule 33 (expression -> STRING_LITERAL .)
+    NEQ             reduce using rule 33 (expression -> STRING_LITERAL .)
+    RPAREN          reduce using rule 33 (expression -> STRING_LITERAL .)
+
+
+state 45
+
+    (11) statement -> FLOAT ID ASSIGN . expression SEMICOLON
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
+
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
     expression                     shift and go to state 63
 
+state 46
+
+    (12) statement -> STRING ID ASSIGN . STRING_LITERAL SEMICOLON
+
+    STRING_LITERAL  shift and go to state 64
+
+
 state 47
 
-    (26) expression -> LPAREN expression . RPAREN
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (14) statement -> COUT LT LT . expression SEMICOLON
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    RPAREN          shift and go to state 64
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 65
 
 state 48
 
-    (5) statement -> FLOAT ID ASSIGN expression . SEMICOLON
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (15) statement -> IF LPAREN expression . RPAREN statement
+    (16) statement -> IF LPAREN expression . RPAREN statement ELSE statement
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    SEMICOLON       shift and go to state 65
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    RPAREN          shift and go to state 66
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
 
 state 49
 
-    (6) statement -> STRING ID ASSIGN STRING_LITERAL . SEMICOLON
+    (17) statement -> WHILE LPAREN expression . RPAREN statement
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    SEMICOLON       shift and go to state 66
+    RPAREN          shift and go to state 67
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
 
 state 50
 
-    (8) statement -> COUT LT LT expression . SEMICOLON
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (18) statement -> FOR LPAREN INT . ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
 
-    SEMICOLON       shift and go to state 67
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    ID              shift and go to state 68
 
 
 state 51
 
-    (9) statement -> IF LPAREN expression RPAREN . statement
-    (10) statement -> IF LPAREN expression RPAREN . statement ELSE statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (10) statement -> INT ID ASSIGN expression . SEMICOLON
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    SEMICOLON       shift and go to state 69
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-    statement                      shift and go to state 68
 
 state 52
 
-    (11) statement -> WHILE LPAREN expression RPAREN . statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (13) statement -> ID ASSIGN expression SEMICOLON .
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    RBRACE          reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    FLOAT           reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    ID              reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    COUT            reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    WHILE           reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    FOR             reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    LBRACE          reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
+    ELSE            reduce using rule 13 (statement -> ID ASSIGN expression SEMICOLON .)
 
-    statement                      shift and go to state 69
 
 state 53
 
-    (12) statement -> FOR LPAREN INT ID . ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (21) expression -> expression PLUS . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    ASSIGN          shift and go to state 70
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 70
 
 state 54
 
-    (4) statement -> INT ID ASSIGN expression SEMICOLON .
+    (22) expression -> expression MINUS . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-    INT             reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    FLOAT           reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    STRING          reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    ID              reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    COUT            reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    IF              reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    WHILE           reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    FOR             reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    LBRACE          reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    $end            reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    RBRACE          reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
-    ELSE            reduce using rule 4 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
+    expression                     shift and go to state 71
 
 state 55
 
-    (15) expression -> expression PLUS expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (23) expression -> expression MULT . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 15 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 15 (expression -> expression PLUS expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! MINUS           [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! MULT            [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! DIV             [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! MOD             [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! LT              [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! GT              [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! EQ              [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-  ! NEQ             [ reduce using rule 15 (expression -> expression PLUS expression .) ]
-
+    expression                     shift and go to state 72
 
 state 56
 
-    (16) expression -> expression MINUS expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (24) expression -> expression DIV . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 16 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 16 (expression -> expression MINUS expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! MINUS           [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! MULT            [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! DIV             [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! MOD             [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! LT              [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! GT              [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! EQ              [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-  ! NEQ             [ reduce using rule 16 (expression -> expression MINUS expression .) ]
-
+    expression                     shift and go to state 73
 
 state 57
 
-    (17) expression -> expression MULT expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (25) expression -> expression MOD . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 17 (expression -> expression MULT expression .)
-    RPAREN          reduce using rule 17 (expression -> expression MULT expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! MINUS           [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! MULT            [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! DIV             [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! MOD             [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! LT              [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! GT              [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! EQ              [ reduce using rule 17 (expression -> expression MULT expression .) ]
-  ! NEQ             [ reduce using rule 17 (expression -> expression MULT expression .) ]
-
+    expression                     shift and go to state 74
 
 state 58
 
-    (18) expression -> expression DIV expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (26) expression -> expression LT . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 18 (expression -> expression DIV expression .)
-    RPAREN          reduce using rule 18 (expression -> expression DIV expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! MINUS           [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! MULT            [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! DIV             [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! MOD             [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! LT              [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! GT              [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! EQ              [ reduce using rule 18 (expression -> expression DIV expression .) ]
-  ! NEQ             [ reduce using rule 18 (expression -> expression DIV expression .) ]
-
+    expression                     shift and go to state 75
 
 state 59
 
-    (19) expression -> expression MOD expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (27) expression -> expression GT . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 19 (expression -> expression MOD expression .)
-    RPAREN          reduce using rule 19 (expression -> expression MOD expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! MINUS           [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! MULT            [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! DIV             [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! MOD             [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! LT              [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! GT              [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! EQ              [ reduce using rule 19 (expression -> expression MOD expression .) ]
-  ! NEQ             [ reduce using rule 19 (expression -> expression MOD expression .) ]
-
+    expression                     shift and go to state 76
 
 state 60
 
-    (20) expression -> expression LT expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (28) expression -> expression EQ . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 20 (expression -> expression LT expression .)
-    RPAREN          reduce using rule 20 (expression -> expression LT expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! MINUS           [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! MULT            [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! DIV             [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! MOD             [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! LT              [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! GT              [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! EQ              [ reduce using rule 20 (expression -> expression LT expression .) ]
-  ! NEQ             [ reduce using rule 20 (expression -> expression LT expression .) ]
-
+    expression                     shift and go to state 77
 
 state 61
 
-    (21) expression -> expression GT expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (29) expression -> expression NEQ . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 21 (expression -> expression GT expression .)
-    RPAREN          reduce using rule 21 (expression -> expression GT expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
 
-  ! PLUS            [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! MINUS           [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! MULT            [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! DIV             [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! MOD             [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! LT              [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! GT              [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! EQ              [ reduce using rule 21 (expression -> expression GT expression .) ]
-  ! NEQ             [ reduce using rule 21 (expression -> expression GT expression .) ]
-
+    expression                     shift and go to state 78
 
 state 62
 
-    (22) expression -> expression EQ expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (32) expression -> LPAREN expression . RPAREN
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for MULT resolved as shift
-  ! shift/reduce conflict for DIV resolved as shift
-  ! shift/reduce conflict for MOD resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 22 (expression -> expression EQ expression .)
-    RPAREN          reduce using rule 22 (expression -> expression EQ expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
-
-  ! PLUS            [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! MINUS           [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! MULT            [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! DIV             [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! MOD             [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! LT              [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! GT              [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! EQ              [ reduce using rule 22 (expression -> expression EQ expression .) ]
-  ! NEQ             [ reduce using rule 22 (expression -> expression EQ expression .) ]
+    RPAREN          shift and go to state 79
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
 
 state 63
 
-    (23) expression -> expression NEQ expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (11) statement -> FLOAT ID ASSIGN expression . SEMICOLON
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
+
+    SEMICOLON       shift and go to state 80
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+
+state 64
+
+    (12) statement -> STRING ID ASSIGN STRING_LITERAL . SEMICOLON
+
+    SEMICOLON       shift and go to state 81
+
+
+state 65
+
+    (14) statement -> COUT LT LT expression . SEMICOLON
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
+
+    SEMICOLON       shift and go to state 82
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+
+state 66
+
+    (15) statement -> IF LPAREN expression RPAREN . statement
+    (16) statement -> IF LPAREN expression RPAREN . statement ELSE statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
+
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
+
+    statement                      shift and go to state 83
+    block                          shift and go to state 28
+
+state 67
+
+    (17) statement -> WHILE LPAREN expression RPAREN . statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
+
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
+
+    statement                      shift and go to state 84
+    block                          shift and go to state 28
+
+state 68
+
+    (18) statement -> FOR LPAREN INT ID . ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+
+    ASSIGN          shift and go to state 85
+
+
+state 69
+
+    (10) statement -> INT ID ASSIGN expression SEMICOLON .
+
+    RBRACE          reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    FLOAT           reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    ID              reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    COUT            reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    WHILE           reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    FOR             reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    LBRACE          reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+    ELSE            reduce using rule 10 (statement -> INT ID ASSIGN expression SEMICOLON .)
+
+
+state 70
+
+    (21) expression -> expression PLUS expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
@@ -1448,479 +1200,836 @@ state 63
   ! shift/reduce conflict for GT resolved as shift
   ! shift/reduce conflict for EQ resolved as shift
   ! shift/reduce conflict for NEQ resolved as shift
-    SEMICOLON       reduce using rule 23 (expression -> expression NEQ expression .)
-    RPAREN          reduce using rule 23 (expression -> expression NEQ expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    SEMICOLON       reduce using rule 21 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 21 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-  ! PLUS            [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! MINUS           [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! MULT            [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! DIV             [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! MOD             [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! LT              [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! GT              [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! EQ              [ reduce using rule 23 (expression -> expression NEQ expression .) ]
-  ! NEQ             [ reduce using rule 23 (expression -> expression NEQ expression .) ]
+  ! PLUS            [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! MULT            [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! DIV             [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! MOD             [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! LT              [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! GT              [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! EQ              [ reduce using rule 21 (expression -> expression PLUS expression .) ]
+  ! NEQ             [ reduce using rule 21 (expression -> expression PLUS expression .) ]
 
-
-state 64
-
-    (26) expression -> LPAREN expression RPAREN .
-
-    SEMICOLON       reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    MULT            reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    DIV             reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    MOD             reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    LT              reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    GT              reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    EQ              reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    NEQ             reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 26 (expression -> LPAREN expression RPAREN .)
-
-
-state 65
-
-    (5) statement -> FLOAT ID ASSIGN expression SEMICOLON .
-
-    INT             reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    FLOAT           reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    STRING          reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    ID              reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    COUT            reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    IF              reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    WHILE           reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    FOR             reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    LBRACE          reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    $end            reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    RBRACE          reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-    ELSE            reduce using rule 5 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
-
-
-state 66
-
-    (6) statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .
-
-    INT             reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    FLOAT           reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    STRING          reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    ID              reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    COUT            reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    IF              reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    WHILE           reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    FOR             reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    LBRACE          reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    $end            reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    RBRACE          reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-    ELSE            reduce using rule 6 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
-
-
-state 67
-
-    (8) statement -> COUT LT LT expression SEMICOLON .
-
-    INT             reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    FLOAT           reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    STRING          reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    ID              reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    COUT            reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    IF              reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    WHILE           reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    FOR             reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    LBRACE          reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    $end            reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    RBRACE          reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-    ELSE            reduce using rule 8 (statement -> COUT LT LT expression SEMICOLON .)
-
-
-state 68
-
-    (9) statement -> IF LPAREN expression RPAREN statement .
-    (10) statement -> IF LPAREN expression RPAREN statement . ELSE statement
-
-  ! shift/reduce conflict for ELSE resolved as shift
-    INT             reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    FLOAT           reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    STRING          reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    ID              reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    COUT            reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    IF              reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    WHILE           reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    FOR             reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    LBRACE          reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    $end            reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    RBRACE          reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .)
-    ELSE            shift and go to state 71
-
-  ! ELSE            [ reduce using rule 9 (statement -> IF LPAREN expression RPAREN statement .) ]
-
-
-state 69
-
-    (11) statement -> WHILE LPAREN expression RPAREN statement .
-
-    INT             reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    FLOAT           reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    STRING          reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    ID              reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    COUT            reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    IF              reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    WHILE           reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    FOR             reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    LBRACE          reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    $end            reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    RBRACE          reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-    ELSE            reduce using rule 11 (statement -> WHILE LPAREN expression RPAREN statement .)
-
-
-state 70
-
-    (12) statement -> FOR LPAREN INT ID ASSIGN . expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
-
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
-
-    expression                     shift and go to state 72
 
 state 71
 
-    (10) statement -> IF LPAREN expression RPAREN statement ELSE . statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (22) expression -> expression MINUS expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 22 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 22 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-    statement                      shift and go to state 73
+  ! PLUS            [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! MULT            [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! DIV             [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! MOD             [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! LT              [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! GT              [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! EQ              [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+  ! NEQ             [ reduce using rule 22 (expression -> expression MINUS expression .) ]
+
 
 state 72
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression . SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (23) expression -> expression MULT expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    SEMICOLON       shift and go to state 74
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 23 (expression -> expression MULT expression .)
+    RPAREN          reduce using rule 23 (expression -> expression MULT expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+  ! PLUS            [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! MINUS           [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! MULT            [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! DIV             [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! MOD             [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! LT              [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! GT              [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! EQ              [ reduce using rule 23 (expression -> expression MULT expression .) ]
+  ! NEQ             [ reduce using rule 23 (expression -> expression MULT expression .) ]
 
 
 state 73
 
-    (10) statement -> IF LPAREN expression RPAREN statement ELSE statement .
+    (24) expression -> expression DIV expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    INT             reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    FLOAT           reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    STRING          reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    ID              reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    COUT            reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    IF              reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    WHILE           reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    FOR             reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    LBRACE          reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    $end            reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    RBRACE          reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
-    ELSE            reduce using rule 10 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 24 (expression -> expression DIV expression .)
+    RPAREN          reduce using rule 24 (expression -> expression DIV expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+  ! PLUS            [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! MINUS           [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! MULT            [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! DIV             [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! MOD             [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! LT              [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! GT              [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! EQ              [ reduce using rule 24 (expression -> expression DIV expression .) ]
+  ! NEQ             [ reduce using rule 24 (expression -> expression DIV expression .) ]
 
 
 state 74
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON . expression SEMICOLON assignment RPAREN statement
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (25) expression -> expression MOD expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 25 (expression -> expression MOD expression .)
+    RPAREN          reduce using rule 25 (expression -> expression MOD expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-    expression                     shift and go to state 75
+  ! PLUS            [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! MINUS           [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! MULT            [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! DIV             [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! MOD             [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! LT              [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! GT              [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! EQ              [ reduce using rule 25 (expression -> expression MOD expression .) ]
+  ! NEQ             [ reduce using rule 25 (expression -> expression MOD expression .) ]
+
 
 state 75
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression . SEMICOLON assignment RPAREN statement
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (26) expression -> expression LT expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    SEMICOLON       shift and go to state 76
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 26 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 26 (expression -> expression LT expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+  ! PLUS            [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! MINUS           [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! MULT            [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! DIV             [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! MOD             [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! LT              [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! GT              [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! EQ              [ reduce using rule 26 (expression -> expression LT expression .) ]
+  ! NEQ             [ reduce using rule 26 (expression -> expression LT expression .) ]
 
 
 state 76
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON . assignment RPAREN statement
-    (14) assignment -> . ID ASSIGN expression
+    (27) expression -> expression GT expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    ID              shift and go to state 77
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 27 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 27 (expression -> expression GT expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
 
-    assignment                     shift and go to state 78
+  ! PLUS            [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! MINUS           [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! MULT            [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! DIV             [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! MOD             [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! LT              [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! GT              [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! EQ              [ reduce using rule 27 (expression -> expression GT expression .) ]
+  ! NEQ             [ reduce using rule 27 (expression -> expression GT expression .) ]
+
 
 state 77
 
-    (14) assignment -> ID . ASSIGN expression
+    (28) expression -> expression EQ expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    ASSIGN          shift and go to state 79
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 28 (expression -> expression EQ expression .)
+    RPAREN          reduce using rule 28 (expression -> expression EQ expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+  ! PLUS            [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! MINUS           [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! MULT            [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! DIV             [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! MOD             [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! LT              [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! GT              [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! EQ              [ reduce using rule 28 (expression -> expression EQ expression .) ]
+  ! NEQ             [ reduce using rule 28 (expression -> expression EQ expression .) ]
 
 
 state 78
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment . RPAREN statement
+    (29) expression -> expression NEQ expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
 
-    RPAREN          shift and go to state 80
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+  ! shift/reduce conflict for MOD resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NEQ resolved as shift
+    SEMICOLON       reduce using rule 29 (expression -> expression NEQ expression .)
+    RPAREN          reduce using rule 29 (expression -> expression NEQ expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+  ! PLUS            [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! MINUS           [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! MULT            [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! DIV             [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! MOD             [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! LT              [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! GT              [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! EQ              [ reduce using rule 29 (expression -> expression NEQ expression .) ]
+  ! NEQ             [ reduce using rule 29 (expression -> expression NEQ expression .) ]
 
 
 state 79
 
-    (14) assignment -> ID ASSIGN . expression
-    (15) expression -> . expression PLUS expression
-    (16) expression -> . expression MINUS expression
-    (17) expression -> . expression MULT expression
-    (18) expression -> . expression DIV expression
-    (19) expression -> . expression MOD expression
-    (20) expression -> . expression LT expression
-    (21) expression -> . expression GT expression
-    (22) expression -> . expression EQ expression
-    (23) expression -> . expression NEQ expression
-    (24) expression -> . NUMBER
-    (25) expression -> . ID
-    (26) expression -> . LPAREN expression RPAREN
-    (27) expression -> . STRING_LITERAL
+    (32) expression -> LPAREN expression RPAREN .
 
-    NUMBER          shift and go to state 26
-    ID              shift and go to state 24
-    LPAREN          shift and go to state 27
-    STRING_LITERAL  shift and go to state 28
+    SEMICOLON       reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MULT            reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    DIV             reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    MOD             reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    LT              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    GT              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    NEQ             reduce using rule 32 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 32 (expression -> LPAREN expression RPAREN .)
 
-    expression                     shift and go to state 81
 
 state 80
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN . statement
-    (4) statement -> . INT ID ASSIGN expression SEMICOLON
-    (5) statement -> . FLOAT ID ASSIGN expression SEMICOLON
-    (6) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
-    (7) statement -> . ID ASSIGN expression SEMICOLON
-    (8) statement -> . COUT LT LT expression SEMICOLON
-    (9) statement -> . IF LPAREN expression RPAREN statement
-    (10) statement -> . IF LPAREN expression RPAREN statement ELSE statement
-    (11) statement -> . WHILE LPAREN expression RPAREN statement
-    (12) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
-    (13) statement -> . LBRACE statement_list RBRACE
+    (11) statement -> FLOAT ID ASSIGN expression SEMICOLON .
 
-    INT             shift and go to state 4
-    FLOAT           shift and go to state 6
-    STRING          shift and go to state 7
-    ID              shift and go to state 5
-    COUT            shift and go to state 8
-    IF              shift and go to state 9
-    WHILE           shift and go to state 10
-    FOR             shift and go to state 11
-    LBRACE          shift and go to state 12
+    RBRACE          reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    INT             reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    FLOAT           reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    STRING          reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    ID              reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    COUT            reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    IF              reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    WHILE           reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    FOR             reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    LBRACE          reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
+    ELSE            reduce using rule 11 (statement -> FLOAT ID ASSIGN expression SEMICOLON .)
 
-    statement                      shift and go to state 82
 
 state 81
 
-    (14) assignment -> ID ASSIGN expression .
-    (15) expression -> expression . PLUS expression
-    (16) expression -> expression . MINUS expression
-    (17) expression -> expression . MULT expression
-    (18) expression -> expression . DIV expression
-    (19) expression -> expression . MOD expression
-    (20) expression -> expression . LT expression
-    (21) expression -> expression . GT expression
-    (22) expression -> expression . EQ expression
-    (23) expression -> expression . NEQ expression
+    (12) statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .
 
-    RPAREN          reduce using rule 14 (assignment -> ID ASSIGN expression .)
-    PLUS            shift and go to state 38
-    MINUS           shift and go to state 39
-    MULT            shift and go to state 40
-    DIV             shift and go to state 41
-    MOD             shift and go to state 42
-    LT              shift and go to state 43
-    GT              shift and go to state 44
-    EQ              shift and go to state 45
-    NEQ             shift and go to state 46
+    RBRACE          reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    INT             reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    FLOAT           reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    STRING          reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    ID              reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    COUT            reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    IF              reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    WHILE           reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    FOR             reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    LBRACE          reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
+    ELSE            reduce using rule 12 (statement -> STRING ID ASSIGN STRING_LITERAL SEMICOLON .)
 
 
 state 82
 
-    (12) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .
+    (14) statement -> COUT LT LT expression SEMICOLON .
 
-    INT             reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    FLOAT           reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    STRING          reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    ID              reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    COUT            reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    IF              reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    WHILE           reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    FOR             reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    LBRACE          reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    $end            reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    RBRACE          reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
-    ELSE            reduce using rule 12 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    RBRACE          reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    INT             reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    FLOAT           reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    STRING          reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    ID              reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    COUT            reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    IF              reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    WHILE           reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    FOR             reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    LBRACE          reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+    ELSE            reduce using rule 14 (statement -> COUT LT LT expression SEMICOLON .)
+
+
+state 83
+
+    (15) statement -> IF LPAREN expression RPAREN statement .
+    (16) statement -> IF LPAREN expression RPAREN statement . ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    RBRACE          reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    INT             reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    STRING          reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    ID              reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    COUT            reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    IF              reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .)
+    ELSE            shift and go to state 86
+
+  ! ELSE            [ reduce using rule 15 (statement -> IF LPAREN expression RPAREN statement .) ]
+
+
+state 84
+
+    (17) statement -> WHILE LPAREN expression RPAREN statement .
+
+    RBRACE          reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    INT             reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    FLOAT           reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    STRING          reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    ID              reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    COUT            reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    IF              reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    WHILE           reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    FOR             reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    LBRACE          reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+    ELSE            reduce using rule 17 (statement -> WHILE LPAREN expression RPAREN statement .)
+
+
+state 85
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN . expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
+
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
+
+    expression                     shift and go to state 87
+
+state 86
+
+    (16) statement -> IF LPAREN expression RPAREN statement ELSE . statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
+
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
+
+    statement                      shift and go to state 88
+    block                          shift and go to state 28
+
+state 87
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression . SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
+
+    SEMICOLON       shift and go to state 89
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+
+state 88
+
+    (16) statement -> IF LPAREN expression RPAREN statement ELSE statement .
+
+    RBRACE          reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    INT             reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FLOAT           reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    STRING          reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    ID              reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    COUT            reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    IF              reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    WHILE           reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    FOR             reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    LBRACE          reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+    ELSE            reduce using rule 16 (statement -> IF LPAREN expression RPAREN statement ELSE statement .)
+
+
+state 89
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON . expression SEMICOLON assignment RPAREN statement
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
+
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
+
+    expression                     shift and go to state 90
+
+state 90
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression . SEMICOLON assignment RPAREN statement
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
+
+    SEMICOLON       shift and go to state 91
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+
+state 91
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON . assignment RPAREN statement
+    (20) assignment -> . ID ASSIGN expression
+
+    ID              shift and go to state 92
+
+    assignment                     shift and go to state 93
+
+state 92
+
+    (20) assignment -> ID . ASSIGN expression
+
+    ASSIGN          shift and go to state 94
+
+
+state 93
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment . RPAREN statement
+
+    RPAREN          shift and go to state 95
+
+
+state 94
+
+    (20) assignment -> ID ASSIGN . expression
+    (21) expression -> . expression PLUS expression
+    (22) expression -> . expression MINUS expression
+    (23) expression -> . expression MULT expression
+    (24) expression -> . expression DIV expression
+    (25) expression -> . expression MOD expression
+    (26) expression -> . expression LT expression
+    (27) expression -> . expression GT expression
+    (28) expression -> . expression EQ expression
+    (29) expression -> . expression NEQ expression
+    (30) expression -> . NUMBER
+    (31) expression -> . ID
+    (32) expression -> . LPAREN expression RPAREN
+    (33) expression -> . STRING_LITERAL
+
+    NUMBER          shift and go to state 42
+    ID              shift and go to state 40
+    LPAREN          shift and go to state 43
+    STRING_LITERAL  shift and go to state 44
+
+    expression                     shift and go to state 96
+
+state 95
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN . statement
+    (10) statement -> . INT ID ASSIGN expression SEMICOLON
+    (11) statement -> . FLOAT ID ASSIGN expression SEMICOLON
+    (12) statement -> . STRING ID ASSIGN STRING_LITERAL SEMICOLON
+    (13) statement -> . ID ASSIGN expression SEMICOLON
+    (14) statement -> . COUT LT LT expression SEMICOLON
+    (15) statement -> . IF LPAREN expression RPAREN statement
+    (16) statement -> . IF LPAREN expression RPAREN statement ELSE statement
+    (17) statement -> . WHILE LPAREN expression RPAREN statement
+    (18) statement -> . FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    (19) statement -> . block
+    (7) block -> . LBRACE statement_list RBRACE
+
+    INT             shift and go to state 20
+    FLOAT           shift and go to state 22
+    STRING          shift and go to state 23
+    ID              shift and go to state 21
+    COUT            shift and go to state 24
+    IF              shift and go to state 25
+    WHILE           shift and go to state 26
+    FOR             shift and go to state 27
+    LBRACE          shift and go to state 17
+
+    statement                      shift and go to state 97
+    block                          shift and go to state 28
+
+state 96
+
+    (20) assignment -> ID ASSIGN expression .
+    (21) expression -> expression . PLUS expression
+    (22) expression -> expression . MINUS expression
+    (23) expression -> expression . MULT expression
+    (24) expression -> expression . DIV expression
+    (25) expression -> expression . MOD expression
+    (26) expression -> expression . LT expression
+    (27) expression -> expression . GT expression
+    (28) expression -> expression . EQ expression
+    (29) expression -> expression . NEQ expression
+
+    RPAREN          reduce using rule 20 (assignment -> ID ASSIGN expression .)
+    PLUS            shift and go to state 53
+    MINUS           shift and go to state 54
+    MULT            shift and go to state 55
+    DIV             shift and go to state 56
+    MOD             shift and go to state 57
+    LT              shift and go to state 58
+    GT              shift and go to state 59
+    EQ              shift and go to state 60
+    NEQ             shift and go to state 61
+
+
+state 97
+
+    (18) statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .
+
+    RBRACE          reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    INT             reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    FLOAT           reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    STRING          reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    ID              reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    COUT            reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    IF              reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    WHILE           reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    FOR             reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    LBRACE          reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
+    ELSE            reduce using rule 18 (statement -> FOR LPAREN INT ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 55 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 55 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 55 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 55 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 55 resolved as shift
-WARNING: shift/reduce conflict for LT in state 55 resolved as shift
-WARNING: shift/reduce conflict for GT in state 55 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 55 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 55 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 56 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 56 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 56 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 56 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 56 resolved as shift
-WARNING: shift/reduce conflict for LT in state 56 resolved as shift
-WARNING: shift/reduce conflict for GT in state 56 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 56 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 56 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 57 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 57 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 57 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 57 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 57 resolved as shift
-WARNING: shift/reduce conflict for LT in state 57 resolved as shift
-WARNING: shift/reduce conflict for GT in state 57 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 57 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 57 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 58 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 58 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 58 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 58 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 58 resolved as shift
-WARNING: shift/reduce conflict for LT in state 58 resolved as shift
-WARNING: shift/reduce conflict for GT in state 58 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 58 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 58 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 59 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 59 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 59 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 59 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 59 resolved as shift
-WARNING: shift/reduce conflict for LT in state 59 resolved as shift
-WARNING: shift/reduce conflict for GT in state 59 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 59 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 59 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 60 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 60 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 60 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 60 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 60 resolved as shift
-WARNING: shift/reduce conflict for LT in state 60 resolved as shift
-WARNING: shift/reduce conflict for GT in state 60 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 60 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 60 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 61 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 61 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 61 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 61 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 61 resolved as shift
-WARNING: shift/reduce conflict for LT in state 61 resolved as shift
-WARNING: shift/reduce conflict for GT in state 61 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 61 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 61 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 62 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 62 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 62 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 62 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 62 resolved as shift
-WARNING: shift/reduce conflict for LT in state 62 resolved as shift
-WARNING: shift/reduce conflict for GT in state 62 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 62 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 62 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 63 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 63 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 63 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 63 resolved as shift
-WARNING: shift/reduce conflict for MOD in state 63 resolved as shift
-WARNING: shift/reduce conflict for LT in state 63 resolved as shift
-WARNING: shift/reduce conflict for GT in state 63 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 63 resolved as shift
-WARNING: shift/reduce conflict for NEQ in state 63 resolved as shift
-WARNING: shift/reduce conflict for ELSE in state 68 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 70 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 70 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 70 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 70 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 70 resolved as shift
+WARNING: shift/reduce conflict for LT in state 70 resolved as shift
+WARNING: shift/reduce conflict for GT in state 70 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 70 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 70 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 71 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 71 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 71 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 71 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 71 resolved as shift
+WARNING: shift/reduce conflict for LT in state 71 resolved as shift
+WARNING: shift/reduce conflict for GT in state 71 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 71 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 71 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 72 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 72 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 72 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 72 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 72 resolved as shift
+WARNING: shift/reduce conflict for LT in state 72 resolved as shift
+WARNING: shift/reduce conflict for GT in state 72 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 72 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 72 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 73 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 73 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 73 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 73 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 73 resolved as shift
+WARNING: shift/reduce conflict for LT in state 73 resolved as shift
+WARNING: shift/reduce conflict for GT in state 73 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 73 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 73 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 74 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 74 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 74 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 74 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 74 resolved as shift
+WARNING: shift/reduce conflict for LT in state 74 resolved as shift
+WARNING: shift/reduce conflict for GT in state 74 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 74 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 74 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 75 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 75 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 75 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 75 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 75 resolved as shift
+WARNING: shift/reduce conflict for LT in state 75 resolved as shift
+WARNING: shift/reduce conflict for GT in state 75 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 75 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 75 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 76 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 76 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 76 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 76 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 76 resolved as shift
+WARNING: shift/reduce conflict for LT in state 76 resolved as shift
+WARNING: shift/reduce conflict for GT in state 76 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 76 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 76 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 77 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 77 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 77 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 77 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 77 resolved as shift
+WARNING: shift/reduce conflict for LT in state 77 resolved as shift
+WARNING: shift/reduce conflict for GT in state 77 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 77 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 77 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 78 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 78 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 78 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 78 resolved as shift
+WARNING: shift/reduce conflict for MOD in state 78 resolved as shift
+WARNING: shift/reduce conflict for LT in state 78 resolved as shift
+WARNING: shift/reduce conflict for GT in state 78 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 78 resolved as shift
+WARNING: shift/reduce conflict for NEQ in state 78 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 83 resolved as shift
