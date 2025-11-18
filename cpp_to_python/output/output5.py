@@ -1,7 +1,7 @@
 def main():
-        for i in range(0, 5, 1):
-                    print(i)
-        return 0
+        for i in range(1, (3 + 1), 1):
+                    for j in range(1, (2 + 1), 1):
+                                    print("i=", i, " j=", j)
 
 
 if __name__ == "__main__":

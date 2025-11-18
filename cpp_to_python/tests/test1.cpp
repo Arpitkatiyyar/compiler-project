@@ -3,7 +3,7 @@ using namespace std;
 
 int main() {
     int a = 10;
-    float b = 5.5;
-    cout << "a:" << a << " b:" << b << endl;
-    return 0;
+    int b = 20;
+    int c = a + b * 2 - 5;
+    cout << "Result: " << c << endl;
 }

@@ -1,0 +1,2101 @@
+% C++ to Python Transpiler - Project Report (LaTeX)
+% Generated from provided MS Word project document
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{titling}
+
+% Listings style for Python and C++
+\lstdefinelanguage{MyPython}{
+  language=Python,
+  morekeywords={ply,lex,yacc,print,input,range},
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  captionpos=b,
+}
+
+\begin{titlepage}
+\begin{center}
+
+\begin{minipage}{0.9\textwidth}
+\centering
+
+\vspace*{\fill}
+
+% ----------- TITLE -----------
+{\Huge \bfseries C++ to Python\\[0.2cm]
+Source-to-Source Translator}\\[1.0cm]
+
+% ----------- SUBTITLE -----------
+{\large \itshape
+A Project Submitted in partial fulfillment of the\\
+requirements for the award of the degree of}\\[0.5cm]
+
+% ----------- DEGREE -----------
+{\LARGE \bfseries BACHELOR OF TECHNOLOGY}\\[0.8cm]
+
+% ----------- STUDENT DETAILS -----------
+{\large \bfseries by}\\[0.4cm]
+
+{\Large
+Arpit Katiyar (23BCS023)\\[0.25cm]
+Akshit Pathania (23BCS018)\\[0.25cm]
+Gurudatt Singhal (23BCS033)\\[0.25cm]
+Amgoth Srinivas (23BCS020)
+}\\[1.0cm]
+
+% ----------- GUIDE NAME -----------
+{\large \itshape Under the guidance of}\\[0.25cm]
+{\Large \bfseries Dr. Arun Kumar Yadav}\\[1.0cm]
+
+% ----------- LOGO -----------
+\centering
+\includegraphics[width=4cm]{logo.png}\\[1.0cm]
+
+% ----------- INSTITUTE DETAILS -----------
+{\large
+\textbf{Department of Computer Science \& Engineering}\\
+\textbf{National Institute of Technology Hamirpur}\\
+Hamirpur, India – 177005}\\[0.4cm]
+
+{\Large \bfseries May 2025}
+
+\vspace*{\fill}
+
+\end{minipage}
+
+\end{center}
+\end{titlepage}
+
+
+\newpage
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+
+
+
+
+
+
+
+\begin{document}
+% \maketitle
+\thispagestyle{empty}
+\newpage
+\newpage
+\thispagestyle{empty}
+
+% nit page
+\newpage
+\thispagestyle{empty}
+
+\vspace*{12cm}
+
+\begin{center}
+    {\large \textbf{\textit{© NATIONAL INSTITUTE OF TECHNOLOGY, HAMIRPUR 2025}}}\\[0.8cm]
+    {\large \textbf{\textit{All rights reserved}}}
+\end{center}
+
+\newpage
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+% declaration
+\begin{center}
+    {\Large \textbf{Candidate's Declaration}}\\[1.5cm]
+\end{center}
+
+\noindent
+We hereby declare that the research presented in this dissertation titled 
+\textbf{“C++ to Python Source-to-Source Translator”} submitted in partial fulfillment 
+of the requirements for the award of the Degree of Bachelor of Technology in 
+the Department of Computer Science and Engineering at the 
+\textbf{National Institute of Technology Hamirpur} is an authentic record of our own 
+work carried out during the period from \textbf{July 2025 to November 2025} under the 
+guidance of \textbf{Dr. Arun Kumar Yadav}, Assistant Professor, Department of 
+Computer Science and Engineering, National Institute of Technology Hamirpur.
+
+\vspace{1em}
+
+\noindent
+We further affirm that the content presented in this dissertation has not been 
+submitted for the award of any other degree or diploma at this Institute or any 
+other Institute/University.
+
+\vspace{2cm}
+
+\begin{flushright}
+    \textit{Arpit Katiyar (23BCS023)}\\[0.2cm]
+    \textit{Akshit Pathania (23BCS018)}\\[0.2cm]
+    \textit{Gurudatt Singhal (23BCS033)}\\[0.2cm]
+    \textit{Amgoth Srinivas  (23BCS020)}\\[0.2cm]
+    
+\end{flushright}
+
+\vspace{1cm}
+
+\noindent
+This is to certify that the above statement made by the candidate is true to the 
+best of my knowledge and belief.
+
+\vspace{2cm}
+
+\begin{flushright}
+\textbf{Dr. Arun Kumar Yadav}\\
+Assistant Professor\\
+Department of Computer Science and Engineering
+\end{flushright}
+
+\vfill
+\begin{flushright}
+\textbf{Head CSE}
+\end{flushright}
+% \begin{right}
+% \textbf{Head CSE}
+    
+% \end{right}
+
+\newpage
+
+% acknoledgement
+\newpage
+\thispagestyle{empty}
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+\begin{center}
+    {\Large \textbf{\underline{ACKNOWLEDGEMENTS}}}\\[1.5cm]
+\end{center}
+
+\noindent
+We wish to express our deepest gratitude to our project supervisor, 
+\textbf{Dr. Arun Kumar Yadav}, Assistant Professor, Department of Computer Science and 
+Engineering, National Institute of Technology Hamirpur, for his invaluable guidance, 
+profound knowledge, and unwavering support throughout the course of this research. 
+His expertise and encouragement have been instrumental in the successful completion 
+of this project.
+
+\vspace{1em}
+
+\noindent
+We are particularly appreciative of his critical analysis and insightful observations 
+during evaluations, which greatly contributed to the quality and rigor of the work 
+presented in this report. We would also like to extend our sincere thanks to the 
+mid-semester evaluation committee for their thoughtful feedback and constructive 
+suggestions, which significantly enhanced the outcomes of this project.
+
+\vspace{1em}
+
+\noindent
+Furthermore, we express our sincere gratitude to 
+\textbf{Dr. Siddharth Chauhan}, Head of the Department of Computer Science and 
+Engineering, for his continuous encouragement and administrative support during the 
+course of this research. His assistance has been vital in ensuring the smooth 
+progression of this work.
+
+\vspace{3cm}
+
+\begin{flushright}
+     \textit{Arpit Katiyar (23BCS023)}\\[0.3cm]
+    \textit{Akshit Pathania (23BCS018)}\\[0.3cm]
+    \textit{Gurudatt Singhal (23BCS033)}\\[0.3cm]
+    \textit{Amgoth Srinivas  (23BCS020)}\\
+    
+\end{flushright}
+
+\newpage
+
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+% \listoftables
+% \listoffigures
+\newpage
+
+\pagenumbering{arabic}
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+This project presents the design and development of an automated C++ to Python source-to-source translator implemented using Python and the PLY (Python Lex-Yacc) toolkit. The primary objective of the system is to convert C++ programs into functionally equivalent Python code by simulating the essential phases of a compiler. The translator incorporates lexical analysis, syntax parsing, Abstract Syntax Tree (AST) construction, and structured code generation to ensure that the translated output maintains the logical semantics of the original C++ program. The system supports fundamental programming constructs including variable declarations, arithmetic and logical expressions, conditional statements, loops, functions, nested scopes, and standard input/output operations using cin and cout. A batch-processing module enables automated translation of multiple C++ files, improving usability and scalability for larger test suites. The project not only demonstrates the application of core compiler design principles but also highlights practical challenges in cross-language translation, such as differences in type handling, indentation-based blocks in Python, and mapping C++’s iterative constructs to Python’s range-based loops. The resulting tool serves as a foundational framework for more advanced transpilers and offers valuable insights for students and developers working on language processing, migration of legacy code, and interpreter/compiler construction.
+\newpage
+
+\thispagestyle{empty}
+~ % This non-breaking space ensures the page isn't removed as empty
+\newpage
+\section{Problem Statement}
+Manual conversion of C++ programs to Python is error-prone and time-consuming. The goal of this project is to automate translation for a subset of C++ to Python preserving logical semantics while producing readable Python code.
+
+\section{Introduction}
+Programming languages differ not only in syntax, but also in semantics, type systems, libraries, and runtime behavior. Translating code from one high-level language to another requires a deep understanding of compiler construction concepts.\\
+C++ is widely used for system programming and performance-critical applications, while Python is favored for its simplicity, readability, and rapid development model. A translator that converts C++ code to Python can help students understand language similarities, automate code migration, and enable reuse of existing logic in Python environments.\\
+This project implements a transpiler, a form of compiler that translates source code from one high-level language to another without producing machine code. The translator uses PLY to process C++ syntax and generate equivalent Python code. It manages parsing, AST creation, semantic preservation, and final code emission while ensuring logical consistency between the two languages.
+
+
+\section{Objectives}
+The main goals of the project are:
+\begin{itemize}
+    \item To design and implement a functional C++ to Python source code translator.
+    \item To apply compiler design concepts such as tokenization, parsing, semantic analysis, and code generation.
+    \item To support essential C++ constructs including variables, arithmetic expressions, loops, conditional statements, and functions.
+    \item To implement I/O translation from \texttt{cin}/\texttt{cout} to Python’s \texttt{input()} and \texttt{print()}.
+    \item To provide a batch-processing mechanism for converting multiple C++ files automatically.
+    \item To create modular components (lexer, parser, AST, code generator) that follow compiler architecture.
+    \item To produce readable and logically correct Python output code.
+\end{itemize}
+\pagebreak
+\section{Scope and Language Subset}
+This project focuses on translating a defined subset of the C++ language into
+Python. The supported subset includes:
+\begin{itemize}
+    \item Basic data types: \texttt{int}, \texttt{float}, \texttt{double}, \texttt{char}, \texttt{bool}, \texttt{string}
+    \item Variable declarations and assignments
+    \item Arithmetic and logical expressions
+    \item Conditional statements: \texttt{if}/\texttt{else}
+    \item Loops: \texttt{for}, \texttt{while}
+    \item User input/output using \texttt{cin}/\texttt{cout}
+    \item Functions with return values and parameters
+    \item Nested control structures
+\end{itemize}
+
+Unsupported features include:
+\begin{itemize}
+    \item Classes, objects, and full OOP
+    \item Templates and STL containers
+    \item Pointer manipulation and references
+    \item Preprocessor macros beyond \texttt{\#include}
+\end{itemize}
+
+
+\section{System Requirements}
+\subsection{Software}
+\begin{itemize}
+  \item Python 3.x
+  \item PLY (Python Lex-Yacc)
+  \item Text Editor (VS Code, PyCharm, etc.)
+\end{itemize}
+\subsection{Hardware}
+\begin{itemize}
+  \item 4 GB RAM minimum
+  \item Modern Intel/AMD CPU
+  \item 200 MB disk space
+\end{itemize}
+
+\section{Methodology / System Design}
+\subsection{System Architecture}
+
+The translator follows a structured compiler-design pipeline as shown in Figure~\ref{fig:architecture}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.30\linewidth]{image1.png}
+    \caption{System Architecture Pipeline}
+    \label{fig:architecture}
+\end{figure}
+\newpage
+\begin{itemize}
+    \item \textbf{Lexer} converts raw C++ source code into meaningful tokens.
+    \item \textbf{Parser} interprets the grammar and validates the syntactic structure.
+    \item \textbf{AST (Abstract Syntax Tree)} provides a hierarchical representation of the program.
+    \item \textbf{Code Generator} traverses the AST to generate equivalent Python code.
+    \item \textbf{Batch Processor} applies the entire pipeline to multiple C++ files automatically.
+\end{itemize}
+
+This modular design makes the system highly extendable and maintainable.
+
+\end{figure}
+
+\section{Implementation}
+This section lists the implementation files and their roles. The full source code is included in the Appendix as listings.
+
+\subsection{Project Structure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.50\linewidth]{image.png}
+    \caption{System Architecture Pipeline}
+    \label{fig:architecture}
+\end{figure}
+\pagebreak
+\begin{longtable}{p{0.25\textwidth} p{0.7\textwidth}}
+\toprule
+\textbf{File} & \textbf{Role} \\
+\midrule
+lexer.py & Tokenizer implemented using PLY.lex \\
+parser.py & Grammar and parser implemented using PLY.yacc \\
+ast nodes.py & AST node classes \\
+codegen.py & AST visitor that emits Python code \\
+main.py & Batch driver to process files in \texttt{tests/} and write to \texttt{output/} \\
+\bottomrule
+\end{longtable}
+
+\subsection{Key Implementation Notes}
+\begin{itemize}
+  \item \textbf{Lexical analysis}: tokenizes keywords, identifiers, literals, operators, comments and preprocessor includes.
+  \item \textbf{Syntax analysis}: grammar rules implemented to cover declarations, assignments, expressions, control flow, functions, and I/O.
+  \item \textbf{AST}: node classes encapsulate program structure and are used to generate Python code.
+  \item \textbf{Code generation}: handles translation of for-loops to \texttt{range()}, conversion of I/O, operator mapping (\texttt{&&} → \texttt{and}, \texttt{||} → \texttt{or}), and indentation management.
+  \item \textbf{Complete Source Code}: all modules of the translator, including \texttt{lexer.py}, \texttt{parser.py}, \texttt{ast\_nodes.py}, \texttt{codegen.py}, and \texttt{main.py}, are included in \textbf{Appendix A} for reference.
+\end{itemize}
+\subsection{Source Code Reference}
+
+The complete implementation of the C++ to Python translator is provided in 
+\textbf{Appendix A}. The appendix contains the full source code for each module 
+used in the translation pipeline, including:
+
+\begin{itemize}
+    \item \texttt{lexer.py} – Tokenization of input C++ code.
+    \item \texttt{parser.py} – Grammar rules and syntax analysis.
+    \item \texttt{ast\_nodes.py} – Definitions of all Abstract Syntax Tree nodes.
+    \item \texttt{codegen.py} – Python code generator using AST traversal.
+    \item \texttt{main.py} – Batch processor for handling multiple C++ files.
+\end{itemize}
+
+These files together form the complete translation workflow and are included for 
+reference, analysis, and future extension.
+
+
+% \section{Test Cases and Sample Output}
+% Several test programs were used to validate the translator. Representative inputs and outputs are summarized below.
+
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{p{0.3\textwidth} p{0.3\textwidth} p{0.3\textwidth}}
+% \toprule
+% \textbf{Test} & \textbf{Input (C++)} & \textbf{Output (Python)} \\
+% \midrule
+% 1 & Simple arithmetic with \texttt{cout} & Python function with \texttt{print()} \\
+% 2 & Conditional with logical operators & Translated to \texttt{and}/\texttt{or} \\
+% 3 & Nested for-loops & Nested \texttt{for ... in range(...)} \\
+% 4 & Functions and calls & Python def + calls \\
+% \bottomrule
+% \end{tabular}
+% \caption{Test summary (details in Appendix)}
+% \end{table}
+\pagebreak
+\section{Test Cases and Sample Output}
+
+To evaluate the correctness and robustness of the C++ to Python translator, multiple C++ programs were executed through the complete translation pipeline. These test programs were designed to cover arithmetic expressions, conditionals, iterative constructs, function handling, user input/output, and nested structures. A summarized overview of representative test cases is shown in Table~\ref{tab:testsummary}. The complete C++ inputs and their corresponding Python outputs are provided in the Appendix for reference.
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{c p{0.35\linewidth} p{0.40\linewidth}}
+\toprule
+\textbf{Test} & \textbf{Input (C++)} & \textbf{Output (Python)} \\
+\midrule
+
+1 & Arithmetic expression with \texttt{cout} &
+Translated expression evaluation with \texttt{print()} \\
+
+2 & Conditional statement using logical operators (\texttt{\&\&}, \texttt{||}) &
+Converted to Python \texttt{and}/\texttt{or} expressions \\
+
+3 & User input using \texttt{cin}, and arithmetic operations &
+Python \texttt{input()} translation and computed results printed \\
+
+4 & Nested \texttt{for}-loops &
+Nested \texttt{for ... in range(...)} structures \\
+
+5 & User-defined function and function call &
+Python \texttt{def} with return value and direct function invocation \\
+
+6 & Boolean function and complex conditional checking &
+Python boolean logic with \texttt{True}/\texttt{False} and \texttt{or} evaluation \\
+
+7 & Regression case repeating logical condition evaluation &
+Ensures consistent output translation for duplicate test logic \\
+
+8 & Multi-function program with loops, arithmetic and inputs &
+Translated into multiple Python functions with loop-based logic and user input handling \\
+\bottomrule
+\end{tabular}
+\caption{Summary of all representative test cases (full programs included in Appendix B).}
+\label{tab:testcases}
+\end{table}
+
+
+
+\pagebreak
+\section{Results}
+
+The translator accurately converted all supported \texttt{C++} constructs into equivalent \texttt{Python} code. The system processed multiple test files without errors and maintained correct logical flow. Generated \texttt{Python} code reflects proper indentation, correct syntax, and functional equivalence.
+
+\subsection*{Key Results:}
+\begin{itemize}
+    \item 100\% translation accuracy for supported features
+    \item Successful batch conversion
+    \item Clean and readable output code
+\end{itemize}
+
+\section{Limitations and Future Scope}
+\subsection{Limitations}
+\begin{itemize}
+  \item No support for classes / OOP translation.
+  \item No pointers/references handling.
+  \item Templates and STL (\texttt{vector}, \texttt{map}) not supported.
+  \item Limited preprocessor handling.
+\end{itemize}
+\subsection{Future Enhancements}
+\begin{itemize}
+  \item Add arrays and STL container translation.
+  \item Add class/object mapping for OOP translation.
+  \item Create a GUI/web interface for interactive translation.
+  \item Add switch-case, enums, namespaces translation.
+  \item Improve error recovery in parser.
+\end{itemize}
+
+\section{Conclusion}
+The C++ to Python translator successfully demonstrates compiler design principles including lexing, parsing, AST construction, and code generation. By supporting essential programming constructs, this project provides a practical understanding of language translation techniques. The batch file conversion feature enhances usability, and the modular design allows future expansion.
+
+% \section*{Acknowledgements}
+% PLY documentation and various online compiler design resources.
+\section*{Project Repository}
+The complete source code and project files are available at: \\
+\url{https://github.com/Arpitkatiyyar/compiler-project.git}
+
+\section*{References}
+\begin{enumerate}
+    \item PLY (Python Lex-Yacc) Official Documentation. Available at: \url{http://www.dabeaz.com/ply}
+    \item ISO C++ Standard Documentation. Available at: \url{https://isocpp.org/std/the-standard}
+    \item Python Official Documentation. Available at: \url{https://docs.python.org}
+    \item C++ Reference Documentation. Available at: \url{https://en.cppreference.com}
+    \item Python Language Reference. Available at: \url{https://docs.python.org/3/reference}
+    \item GCC Online Documentation. Available at: \url{https://gcc.gnu.org/onlinedocs}
+    \item LLVM Project Documentation. Available at: \url{https://llvm.org/docs}
+\end{enumerate}
+
+
+\newpage
+\appendix
+\section{Source Code}
+% Appendix: include the main source files as listings. The code below is taken from the MS Word document provided.
+This appendix contains the complete source code of the C++ to Python translator, including all modules used to build and execute the translation pipeline.
+\subsection{lexer.py}
+\begin{lstlisting}[language=MyPython,caption=lexer.py]
+import ply.lex as lex
+import ast as _ast
+# Tokens list
+tokens = [
+    'ID', 'NUMBER', 'PLUS', 'MINUS', 'MULT', 'DIV', 'MOD',
+    'EQ', 'NEQ', 'LE', 'GE', 'LT', 'GT',
+    'ASSIGN', 'PLUSEQ', 'MINUSEQ',
+    'INC', 'DEC',
+    'SEMICOLON', 'COMMA',
+    'LPAREN', 'RPAREN', 'LBRACE', 'RBRACE',
+    'STRING_LITERAL',
+    'SHL', 'SHR',           # << >>
+    'INCLUDE',
+    'LAND', 'LOR', 'NOT'
+]
+# C++ keywords → token types
+reserved = {
+    'int': 'INT',
+    'float': 'FLOAT',
+    'double': 'DOUBLE',
+    'char': 'CHAR',
+    'bool': 'BOOL',
+    'true': 'TRUE',
+    'false': 'FALSE',
+    'string': 'STRING',
+    'void': 'VOID',
+    'cout': 'COUT',
+    'cin': 'CIN',
+
+    'if': 'IF',
+    'else': 'ELSE',
+    'while': 'WHILE',
+    'for': 'FOR',
+    'using': 'USING',
+    'namespace': 'NAMESPACE',
+    'std': 'STD',
+    'main': 'MAIN',
+    'return': 'RETURN'
+}
+for name in reserved.values():
+    if name not in tokens:
+        tokens.append(name)
+# Token regex (order matters!)
+t_SHL = r'<<'
+t_SHR = r'>>'
+t_PLUSEQ = r'\+\='
+t_MINUSEQ = r'\-\='
+t_INC = r'\+\+'
+t_DEC = r'\-\-'
+t_PLUS = r'\+'
+t_MINUS = r'-'
+t_MULT = r'\*'
+t_DIV = r'/'
+t_MOD = r'%'
+t_EQ = r'=='
+t_NEQ = r'!='
+t_LE = r'<='
+t_GE = r'>='
+t_LT = r'<'
+t_GT = r'>'
+t_ASSIGN = r'='
+t_SEMICOLON = r';'
+t_COMMA = r','
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_LBRACE = r'\{'
+t_RBRACE = r'\}'
+t_LAND = r'&&'
+t_LOR = r'\|\|'
+t_NOT = r'!'
+# includes
+def t_INCLUDE(t):
+    r'\#include\s*<[^>]+>'
+    text = t.value
+    t.value = text[text.find('<') + 1 : text.rfind('>')]
+    return t
+# string literal
+def t_STRING_LITERAL(t):
+    r'\"([^\\\n]|(\\.))*?\"'
+    try:
+        t.value = _ast.literal_eval(t.value)
+    except:
+        t.value = t.value[1:-1]
+    return t
+# number (integer or float)
+def t_NUMBER(t):
+    r'\d+\.\d+|\d+'
+    t.value = float(t.value) if '.' in t.value else int(t.value)
+    return t
+# identifier / keyword
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, "ID")
+    return t
+# comments
+def t_comment_singleline(t):
+    r'//.*'
+    pass
+def t_comment_multiline(t):
+    r'/\*([^*]|\*+[^*/])*\*+/'
+    pass
+# ignore
+t_ignore = " \t\r"
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+def t_error(t):
+    print(f"Illegal char '{t.value[0]}' at line {t.lineno}")
+    t.lexer.skip(1)
+lexer = lex.lex()
+
+\end{lstlisting}
+
+\subsection{ parser.py}
+\begin{lstlisting}[language=Python, caption=Parser Definition (\texttt{parser.py})]
+import ply.yacc as yacc
+from lexer import tokens
+from ast_nodes import *
+# Precedence rules
+precedence = (
+    ('left', 'LOR'),
+    ('left', 'LAND'),
+    ('left', 'EQ', 'NEQ'),
+    ('left', 'LT', 'LE', 'GT', 'GE'),
+    ('left', 'PLUS', 'MINUS'),
+    ('left', 'MULT', 'DIV', 'MOD'),
+    ('right', 'NOT'),
+    ('right', 'UMINUS'),
+)
+# Program structure
+def p_program(p):
+    '''program : external_list'''
+    p[0] = ProgramNode(p[1])
+def p_external_list(p):
+    external_list : external
+                     | external_list external
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[2]]
+def p_external(p):
+    external : includes
+                 | using_namespace
+                 | function_def
+                 | main_function
+    p[0] = p[1]
+
+# includes / using namespace
+def p_includes(p):
+    includes : INCLUDE
+    p[0] = None
+def p_using_namespace(p):
+    using_namespace : USING NAMESPACE STD SEMICOLON
+                         | empty
+    p[0] = None
+# Function definitions
+def p_function_def(p):
+    function_def : type ID LPAREN param_list RPAREN block
+    p[0] = FunctionNode(p[1], p[2], p[4], p[6])
+def p_main_function(p):
+    main_function : INT MAIN LPAREN RPAREN block
+    p[0] = FunctionNode('INT', 'main', [], p[5])
+def p_param_list(p):
+    param_list : empty
+                 | params
+    p[0] = [] if p[1] is None else p[1]
+def p_params(p):
+    params : param
+             | params COMMA param
+    p[0] = [p[1]] if len(p) == 2 else p[1] + [p[3]]
+def p_param(p):
+    param : type ID
+    p[0] = ParamNode(p[1], p[2])
+# Types
+def p_type(p):
+    type : INT
+            | FLOAT
+            | DOUBLE
+            | CHAR
+            | BOOL
+            | STRING
+            | VOID
+    p[0] = p.slice[1].type
+# Block / Statement list
+def p_block(p):
+    'block : LBRACE statement_list RBRACE'
+    p[0] = BlockNode(p[2])
+def p_statement_list(p):
+    statement_list : empty
+                     | statement_list statement
+    p[0] = [] if p[1] is None else p[1] + [p[2]]
+
+def p_statement(p):
+    statement : declaration SEMICOLON
+                 | assignment SEMICOLON
+                 | print_stmt SEMICOLON
+                 | input_stmt SEMICOLON
+                 | if_stmt
+                 | while_stmt
+                 | for_stmt
+                 | return_stmt SEMICOLON
+                 | block
+    p[0] = p[1]
+# Variable declaration
+def p_declaration(p):
+    declaration : type ID ASSIGN expression
+                   | type ID ASSIGN STRING_LITERAL
+    typ = p[1]
+    name = p[2]
+    val = p[4]
+    if isinstance(val, str):
+        val = StringNode(val)
+    p[0] = DeclarationNode(typ, name, val)
+# Assignments
+def p_assignment_basic(p):
+    assignment : ID ASSIGN expression
+    p[0] = AssignNode(p[1], p[3])
+def p_assignment_pluseq(p):
+    assignment : ID PLUSEQ expression
+    p[0] = AssignNode(p[1], BinOpNode('+', VarNode(p[1]), p[3]))
+def p_assignment_minuseq(p):
+    assignment : ID MINUSEQ expression
+    p[0] = AssignNode(p[1], BinOpNode('-', VarNode(p[1]), p[3]))
+def p_assignment_inc(p):
+    assignment : ID INC
+    p[0] = AssignNode(p[1], BinOpNode('+', VarNode(p[1]), NumNode(1)))
+def p_assignment_dec(p):
+    assignment : ID DEC
+    p[0] = AssignNode(p[1], BinOpNode('-', VarNode(p[1]), NumNode(1)))
+# cout << printing
+def p_print_stmt(p):
+    print_stmt : COUT print_tail
+    p[0] = PrintNode(p[2])
+def p_print_tail_single(p):
+    print_tail : SHL expression
+    p[0] = [p[2]]
+
+def p_print_tail_chain(p):
+    print_tail : print_tail SHL expression
+    p[0] = p[1] + [p[3]]
+# cin >> input
+def p_input_stmt(p):
+    input_stmt : CIN input_tail
+    p[0] = InputNode(p[2])
+def p_input_tail_single(p):
+    input_tail : SHR ID
+    p[0] = [p[2]]
+def p_input_tail_chain(p):
+    input_tail : input_tail SHR ID
+    p[0] = p[1] + [p[3]]
+# if / while / for
+def p_if_stmt(p):
+    if_stmt : IF LPAREN expression RPAREN statement
+                 | IF LPAREN expression RPAREN statement ELSE statement
+    p[0] = IfNode(p[3], p[5], None if len(p) == 6 else p[7])
+def p_while_stmt(p):
+    while_stmt : WHILE LPAREN expression RPAREN statement
+    p[0] = WhileNode(p[3], p[5])
+def p_for_stmt_decl(p):
+    for_stmt : FOR LPAREN type ID ASSIGN expression SEMICOLON expression SEMICOLON assignment RPAREN statement
+    init = DeclarationNode(p[3], p[4], p[6])
+    p[0] = ForNode(init, p[8], p[10], p[12])
+def p_for_stmt_assign(p):
+    for_stmt : FOR LPAREN assignment SEMICOLON expression SEMICOLON assignment RPAREN statement
+    p[0] = ForNode(p[3], p[5], p[7], p[9])
+# return
+def p_return_stmt_val(p):
+    return_stmt : RETURN expression
+    p[0] = ReturnNode(p[2])
+def p_return_stmt_empty(p):
+    return_stmt : RETURN
+    p[0] = ReturnNode(None)
+# Expressions
+def p_expression_binop(p):
+    expression : expression PLUS expression
+                 | expression MINUS expression
+                 | expression MULT expression
+                 | expression DIV expression
+                 | expression MOD expression
+                 | expression LT expression
+                 | expression GT expression
+                 | expression LE expression
+                 | expression GE expression
+                 | expression EQ expression
+                 | expression NEQ expression
+                 | expression LAND expression
+                 | expression LOR expression
+    p[0] = BinOpNode(p[2], p[1], p[3])
+def p_expression_unary(p):
+    expression : NOT expression
+                 | MINUS expression %prec UMINUS
+    p[0] = UnaryOpNode(p[1], p[2])
+def p_expression_number(p):
+    expression : NUMBER
+    p[0] = NumNode(p[1])
+def p_expression_bool(p):
+    expression : TRUE
+                 | FALSE
+    p[0] = BoolNode(p.slice[1].type == 'TRUE')
+def p_expression_string(p):
+    expression : STRING_LITERAL
+    p[0] = StringNode(p[1])
+def p_expression_var(p):
+    expression : ID
+    p[0] = VarNode(p[1])
+# function call
+def p_expression_call(p):
+    expression : ID LPAREN arg_list RPAREN
+    p[0] = CallNode(p[1], p[3])
+def p_arg_list_empty(p):
+    arg_list : empty
+    p[0] = []
+def p_arg_list_single(p):
+    arg_list : expression
+    p[0] = [p[1]]
+def p_arg_list_multi(p):
+    arg_list : arg_list COMMA expression
+    p[0] = p[1] + [p[3]]
+def p_expression_paren(p):
+    expression : LPAREN expression RPAREN
+    p[0] = p[2]
+# Empty
+def p_empty(p):
+    empty :
+    pass
+
+# Error
+def p_error(p):
+    if p:
+        print(f"Syntax error at '{p.value}' (line {p.lineno})")
+    else:
+        print("Syntax error at EOF")
+parser = yacc.yacc()
+\end{lstlisting}
+
+\subsection{AST nodes.py}
+\begin{lstlisting}[language=MyPython,caption=astnodes.py]
+class ProgramNode:
+    def __init__(self, declarations):
+        self.declarations = declarations
+    def __repr__(self):
+        return f"Program({self.declarations})"
+
+class BlockNode:
+    def __init__(self, statements):
+        self.statements = statements
+    def __repr__(self):
+        return f"Block({self.statements})"
+
+class DeclarationNode:
+    def __init__(self, type_name, name, value):
+        self.type_name = type_name
+        self.name = name
+        self.value = value
+    def __repr__(self):
+        return f"Decl({self.type_name} {self.name} = {self.value})"
+
+class AssignNode:
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+    def __repr__(self):
+        return f"Assign({self.name}={self.value})"
+
+class PrintNode:
+    def __init__(self, expr_list):
+        self.expr = expr_list
+    def __repr__(self):
+        return f"Print({self.expr})"
+
+class InputNode:
+    def __init__(self, targets):
+        self.targets = targets
+    def __repr__(self):
+        return f"Input({self.targets})"
+
+class IfNode:
+    def __init__(self, cond, then, else_):
+        self.cond = cond
+        self.then = then
+        self.else_ = else_
+    def __repr__(self):
+        return f"If({self.cond}, {self.then}, else={self.else_})"
+
+class WhileNode:
+    def __init__(self, cond, body):
+        self.cond = cond
+        self.body = body
+    def __repr__(self):
+        return f"While({self.cond}, {self.body})"
+
+class ForNode:
+    def __init__(self, init, cond, incr, body):
+        self.init = init
+        self.cond = cond
+        self.incr = incr
+        self.body = body
+    def __repr__(self):
+        return f"For({self.init}, {self.cond}, {self.incr}, {self.body})"
+
+class ReturnNode:
+    def __init__(self, expr):
+        self.expr = expr
+    def __repr__(self):
+        return f"Return({self.expr})"
+
+class FunctionNode:
+    def __init__(self, ret_type, name, params, body):
+        self.ret_type = ret_type
+        self.name = name
+        self.params = params
+        self.body = body
+    def __repr__(self):
+        return f"Function({self.ret_type} {self.name}({self.params}) {self.body})"
+
+class ParamNode:
+    def __init__(self, type_name, name):
+        self.type_name = type_name
+        self.name = name
+    def __repr__(self):
+        return f"Param({self.type_name} {self.name})"
+
+class CallNode:
+    def __init__(self, name, args):
+        self.name = name
+        self.args = args
+    def __repr__(self):
+        return f"Call({self.name}, {self.args})"
+
+class BinOpNode:
+    def __init__(self, op, left, right):
+        self.op = op
+        self.left = left
+        self.right = right
+    def __repr__(self):
+        return f"BinOp({self.left} {self.op} {self.right})"
+
+class UnaryOpNode:
+    def __init__(self, op, expr):
+        self.op = op
+        self.expr = expr
+    def __repr__(self):
+        return f"Unary({self.op} {self.expr})"
+
+class NumNode:
+    def __init__(self, value):
+        self.value = value
+    def __repr__(self):
+        return f"Num({self.value})"
+
+class BoolNode:
+    def __init__(self, value):
+        self.value = bool(value)
+    def __repr__(self):
+        return f"Bool({self.value})"
+
+class VarNode:
+    def __init__(self, name):
+        self.name = name
+    def __repr__(self):
+        return f"Var({self.name})"
+
+class StringNode:
+    def __init__(self, value):
+        self.value = value
+    def __repr__(self):
+        return f"String({self.value!r})"
+
+
+\end{lstlisting}
+
+\subsection{codegen.py}
+\begin{lstlisting}[language=MyPython,caption=codegen.py]
+from ast_nodes import *
+class CodeGenerator:
+    def __init__(self):
+        self.indent_level = 0
+        self.symtab = {}           
+        self.functions = []        
+
+    def indent(self):
+        return "    " * self.indent_level
+
+    # Top Level Dispatcher
+    def generate(self, node):
+        if node is None:
+            return ""
+
+        # ------------------ PROGRAM ------------------
+        if isinstance(node, ProgramNode):
+            parts = []
+            for d in node.declarations:
+                if d:
+                    parts.append(self.generate(d))
+
+            # auto-add main() runner
+            if any(isinstance(d, FunctionNode) and d.name == "main"
+                   for d in node.declarations):
+                parts.append('\nif __name__ == "__main__":\n    main()')
+
+            return "\n\n".join(parts)
+
+        # ------------------ FUNCTION ------------------
+        elif isinstance(node, FunctionNode):
+            params = ", ".join(p.name for p in node.params)
+            header = f"def {node.name}({params}):"
+            self.indent_level += 1
+            saved = self.symtab.copy()
+
+            for p in node.params:
+                self.symtab[p.name] = p.type_name
+
+            body = self.generate(node.body)
+
+            self.symtab = saved
+            self.indent_level -= 1
+            return header + "\n" + body
+
+        # ------------------ BLOCK ------------------
+        elif isinstance(node, BlockNode):
+            self.indent_level += 1
+            lines = []
+
+            for stmt in node.statements:
+                g = self.generate(stmt)
+                if not g:
+                    continue
+
+                for line in g.splitlines():
+                    if line.strip() == "":
+                        lines.append("")
+                    else:
+                        lines.append(self.indent() + line)
+
+            self.indent_level -= 1
+
+            if not lines:
+                return self.indent() + "pass"
+            return "\n".join(lines)
+
+        # ------------------ DECLARATION ------------------
+        elif isinstance(node, DeclarationNode):
+            self.symtab[node.name] = node.type_name
+            if node.value:
+                return f"{node.name} = {self.generate(node.value)}"
+            else:
+                return f"{node.name} = None"
+
+        # ------------------ ASSIGNMENT ------------------
+        elif isinstance(node, AssignNode):
+            return f"{node.name} = {self.generate(node.value)}"
+
+       
+ # ------------------ PRINT ------------------
+        elif isinstance(node, PrintNode):
+            parts = []
+            had_endl = False
+
+            for expr in node.expr:
+                if isinstance(expr, VarNode) and expr.name == "endl":
+                    had_endl = True
+                else:
+                    parts.append(self.generate(expr))
+
+            if had_endl:
+                return f"print({', '.join(parts)})"
+
+            if parts:
+                return f"print({', '.join(parts)}, end='')"
+            else:
+                return "print(end='')"
+
+        # ------------------ INPUT ------------------
+        elif isinstance(node, InputNode):
+            lines = []
+            for name in node.targets:
+                t = self.symtab.get(name)
+                if t == "INT":
+                    lines.append(f"{name} = int(input())")
+                elif t in ("FLOAT", "DOUBLE"):
+                    lines.append(f"{name} = float(input())")
+                else:
+                    lines.append(f"{name} = input()")
+            return "\n".join(lines)
+
+        # ------------------ IF ------------------
+        elif isinstance(node, IfNode):
+            code = f"if {self.generate(node.cond)}:\n" + self.generate(node.then)
+            if node.else_:
+                code += f"\nelse:\n" + self.generate(node.else_)
+            return code
+
+        # ------------------ WHILE ------------------
+        elif isinstance(node, WhileNode):
+            return f"while {self.generate(node.cond)}:\n{self.generate(node.body)}"
+
+        # ------------------ FOR ------------------
+        elif isinstance(node, ForNode):
+            return self.generate_for(node)
+
+        # ------------------ RETURN ------------------
+        elif isinstance(node, ReturnNode):
+            if node.expr is None:
+                return "return"
+            return f"return {self.generate(node.expr)}"
+
+        # ------------------ FUNCTION CALL ------------------
+        elif isinstance(node, CallNode):
+            args = ", ".join(self.generate(a) for a in node.args)
+            return f"{node.name}({args})"
+
+        # ------------------ BINARY OP ------------------
+        elif isinstance(node, BinOpNode):
+            op = node.op
+            if op == "&&": op = "and"
+            if op == "||": op = "or"
+            return f"({self.generate(node.left)} {op} {self.generate(node.right)})"
+
+        # ------------------ UNARY OP ------------------
+        elif isinstance(node, UnaryOpNode):
+            if node.op == "!":
+                return f"(not {self.generate(node.expr)})"
+            if node.op == "-":
+                return f"(-{self.generate(node.expr)})"
+            return f"({node.op}{self.generate(node.expr)})"
+
+        # ------------------ LITERALS ------------------
+        elif isinstance(node, NumNode):
+            return str(node.value)
+
+        elif isinstance(node, BoolNode):
+            return "True" if node.value else "False"
+
+        elif isinstance(node, VarNode):
+            return node.name
+
+        elif isinstance(node, StringNode):
+            esc = node.value.replace('"', '\\"')
+            return f"\"{esc}\""
+
+        return f"# Unsupported node {node}"
+
+    #           FULLY UPDATED FOR LOOP GENERATOR
+    def generate_for(self, node):
+        init = node.init
+        cond = node.cond
+        incr = node.incr
+        body = node.body
+
+        # ----------- init -----------
+        if isinstance(init, DeclarationNode):
+            var = init.name
+            start = self.generate(init.value)
+        elif isinstance(init, AssignNode):
+            var = init.name
+            start = self.generate(init.value)
+        else:
+            return self.generate_fallback_for(node)
+
+        # ----------- condition -----------
+        if not isinstance(cond, BinOpNode):
+            return self.generate_fallback_for(node)
+
+        if not isinstance(cond.left, VarNode) or cond.left.name != var:
+            return self.generate_fallback_for(node)
+
+        op = cond.op
+        stop = self.generate(cond.right)  
+
+        # adjust <= and >=
+        if op == "<=":
+            stop = f"({stop} + 1)"
+        elif op == ">=":
+            stop = f"({stop} - 1)"
+
+        # ----------- step detection -----------
+        step = "1"
+
+        if isinstance(incr, AssignNode) and isinstance(incr.value, BinOpNode):
+            incop = incr.value.op
+            val = self.generate(incr.value.right)
+
+            if incop == "+":
+                step = val
+            elif incop == "-":
+                step = f"-{val}"
+
+        # If loop is descending
+        if op in (">", ">=") and not step.startswith("-"):
+            step = "-" + step
+
+        # ----------- Build final Python loop -----------
+        loop = f"for {var} in range({start}, {stop}, {step}):\n"
+        loop += self.generate(body)
+        return loop
+
+    # fallback -> while loop 
+    def generate_fallback_for(self, node):
+        init_code = self.generate(node.init)
+        cond_code = self.generate(node.cond)
+        incr_code = self.generate(node.incr)
+        body_code = self.generate(node.body)
+
+        result = init_code + "\n"
+        result += f"while {cond_code}:\n"
+
+        self.indent_level += 1
+        for line in body_code.splitlines():
+            result += self.indent() + line + "\n"
+        result += self.indent() + incr_code + "\n"
+        self.indent_level -= 1
+
+        return result
+
+
+# Manual tester
+if __name__ == "__main__":
+    from parser import parser
+    with open(input("File location: "), "r", encoding="utf-8") as f:
+        data = f.read()
+
+    ast = parser.parse(data)
+    print("AST:", ast)
+
+    gen = CodeGenerator()
+    py_code = gen.generate(ast)
+    print("\nGenerated Python code:\n")
+    print(py_code)
+
+\end{lstlisting}
+
+\subsection{main.py}
+\begin{lstlisting}[language=MyPython,caption=main.py]
+import os
+import re
+from parser import parser
+from codegen import CodeGenerator
+
+# Natural sort key 
+def natural_key(filename):
+    return [
+        int(text) if text.isdigit() else text.lower()
+        for text in re.split(r'(\d+)', filename)
+    ]
+
+def convert_cpp_to_python(input_path, output_path):
+    """Convert a single C++ file into a Python file."""
+    with open(input_path, "r", encoding="utf-8") as f:
+        cpp_code = f.read()
+
+    # Parse C++ to AST
+    ast = parser.parse(cpp_code)
+
+    # Generate Python code
+    gen = CodeGenerator()
+    py_code = gen.generate(ast)
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(py_code)
+
+    print(f"[OK] Converted: {input_path} -> {output_path}")
+
+def main():
+    test_folder = "tests"
+    output_folder = "output"
+    # Create output directory if needed
+    os.makedirs(output_folder, exist_ok=True)
+    # Get only .cpp files and sort them naturally
+    cpp_files = sorted(
+        (f for f in os.listdir(test_folder) if f.endswith(".cpp")),
+        key=natural_key
+    )
+
+   
+ if not cpp_files:
+        print("No .cpp files found in 'tests/' folder.")
+        return
+    # Convert each file in correct order
+    for index, filename in enumerate(cpp_files, start=1):
+        input_path = os.path.join(test_folder, filename)
+        output_path = os.path.join(output_folder, f"output{index}.py")
+        convert_cpp_to_python(input_path, output_path)
+    print("\nAll files converted successfully!")
+    print("Check the 'output/' folder.")
+
+if __name__ == "__main__":
+    main()
+
+
+\end{lstlisting}
+
+\vspace{1em}
+
+
+% \appendix
+% \section*{Appendix B: Detailed Test Cases and Outputs}
+% This appendix contains the full C++ input programs and their corresponding translated Python outputs. Each test case is categorized based on the type of construct it is designed to validate.
+
+% % ============================================
+% % Test 1
+% % ============================================
+% \subsection*{Test 1: Arithmetic Expression and Basic Output}
+% \textbf{Category:} Arithmetic Operations, Expression Evaluation, Basic \texttt{cout} Handling
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int main() {
+%     int a = 10;
+%     int b = 20;
+%     int c = a + b * 2 - 5;
+%     cout << "Result: " << c << endl;
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def main():
+%     a = 10
+%     b = 20
+%     c = ((a + (b * 2)) - 5)
+%     print("Result: ", c)
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 2
+% % ============================================
+% \subsection*{Test 2: Conditional Statement with Logical Operators}
+% \textbf{Category:} Conditionals, Logical Operators (\texttt{&&}, \texttt{||})
+
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int main() {
+%     int x = 15;
+
+%     if (x > 10 && x < 20) {
+%         cout << "x is between 10 and 20" << endl;
+%     } else {
+%         cout << "x is out of range" << endl;
+%     }
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def main():
+%     x = 15
+%     if ((x > 10) and (x < 20)):
+%         print("x is between 10 and 20")
+%     else:
+%         print("x is out of range")
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 3
+% % ============================================
+% \subsection*{Test 3: User Input Handling and Arithmetic}
+% \textbf{Category:} I/O Translation (\texttt{cin}/\texttt{cout}), Arithmetic Operations
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int main() {
+%     int x = 0;
+%     int y = 0;
+%     cout << "Enter x:";
+%     cin >> x;
+%     cout << "Enter y:";
+%     cin >> y;
+%     int sum = x + y;
+%     int mul = x * y;
+%     cout << "sum=" << sum << " mul=" << mul << endl;
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def main():
+%     x = 0
+%     y = 0
+%     print("Enter x:", end='')
+%     x = int(input())
+%     print("Enter y:", end='')
+%     y = int(input())
+%     sum = (x + y)
+%     mul = (x * y)
+%     print("sum=", sum, " mul=", mul)
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 4
+% % ============================================
+% \subsection*{Test 4: Nested For-Loops}
+% \textbf{Category:} Loop Translation, Nested Loops, \texttt{for} → \texttt{range()}
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int main() {
+%     for (int i = 1; i <= 3; i++) {
+%         for (int j = 1; j <= 2; j++) {
+%             cout << "i=" << i << " j=" << j << endl;
+%         }
+%     }
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def main():
+%     for i in range(1, (3 + 1), 1):
+%         for j in range(1, (2 + 1), 1):
+%             print("i=", i, " j=", j)
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 5
+% % ============================================
+% \subsection*{Test 5: User-Defined Function and Function Call}
+% \textbf{Category:} Functions, Return Statements, Function Invocation
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int add(int a, int b) {
+%     return a + b;
+% }
+
+% int main() {
+%     int x = 10;
+%     int y = 20;
+%     int s = add(x, y);
+%     cout << "Sum=" << s << endl;
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def add(a, b):
+%     return (a + b)
+
+% def main():
+%     x = 10
+%     y = 20
+%     s = add(x, y)
+%     print("Sum=", s)
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 6
+% % ============================================
+% \subsection*{Test 6: Boolean Function and Logical Evaluation}
+% \textbf{Category:} Boolean Logic, Function Return Values, Complex Conditionals
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% bool check(int a, int b) {
+%     if (a > 0 && b > 0) {
+%         return true;
+%     } else {
+%         return false;
+%     }
+% }
+
+% int main() {
+%     int x = 3;
+%     int y = -1;
+%     if (check(x, y) || x > 1) {
+%         cout << "OK" << endl;
+%     } else {
+%         cout << "NOT OK" << endl;
+%     }
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def check(a, b):
+%     if ((a > 0) and (b > 0)):
+%         return True
+%     else:
+%         return False
+
+% def main():
+%     x = 3
+%     y = -1
+%     if (check(x, y) or (x > 1)):
+%         print("OK")
+%     else:
+%         print("NOT OK")
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 7
+% % ============================================
+% \subsection*{Test 7: Duplicate Case to Validate Consistency}
+% \textbf{Category:} Regression Test, Logical Operators, Consistency Check
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% bool check(int a, int b) {
+%     if (a > 0 && b > 0) {
+%         return true;
+%     } else {
+%         return false;
+%     }
+% }
+
+% int main() {
+%     int x = 3;
+%     int y = -1;
+%     if (check(x, y) || x > 1) {
+%         cout << "OK" << endl;
+%     } else {
+%         cout << "NOT OK" << endl;
+%     }
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def check(a, b):
+%     if ((a > 0) and (b > 0)):
+%         return True
+%     else:
+%         return False
+
+% def main():
+%     x = 3
+%     y = -1
+%     if (check(x, y) or (x > 1)):
+%         print("OK")
+%     else:
+%         print("NOT OK")
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+% % ============================================
+% % Test 8
+% % ============================================
+% \subsection*{Test 8: Multi-Function Program with Loops and Processing}
+% \textbf{Category:} Multi-Function Program, Loops, Arithmetic, I/O, Complex Translation
+
+% \subsubsection*{Input (C++)}
+% \begin{lstlisting}[language=C++]
+% #include <iostream>
+% using namespace std;
+
+% int factorial(int n) {
+%     int f = 1;
+%     for (int i = 1; i < n + 1; i++) {
+%         f = f + (f * (i - 1));
+%     }
+%     return f;
+% }
+
+% int fibonacci(int n) {
+%     int a = 0;
+%     int b = 1;
+%     int temp = 0;
+%     for (int i = 1; i < n + 1; i++) {
+%         temp = a + b;
+%         a = b;
+%         b = temp;
+%     }
+%     return a;
+% }
+
+% int sumSquares(int n) {
+%     int s = 0;
+%     for (int i = 1; i < n + 1; i++) {
+%         s = s + (i * i);
+%     }
+%     return s;
+% }
+
+% int compute(int x, int y, int z) {
+%     int fact = factorial(x);
+%     int fib = fibonacci(y);
+%     int sq  = sumSquares(z);
+%     int result = fact + fib + sq ;
+%     return result;
+% }
+
+% int main() {
+%     int x=0;
+%     int y=0;
+%     int z=0;
+%     cout << "Enter x: ";
+%     cin >> x;
+%     cout << "Enter y: ";
+%     cin >> y;
+%     cout << "Enter z: ";
+%     cin >> z;
+%     cout << "Processing..." << endl;
+%     int output = compute(x, y, z);
+%     cout << "Final Output = " << output << endl;
+% }
+% \end{lstlisting}
+
+% \subsubsection*{Output (Python)}
+% \begin{lstlisting}[language=Python]
+% def factorial(n):
+%     f = 1
+%     for i in range(1, (n + 1), 1):
+%         f = (f + (f * (i - 1)))
+%     return f
+
+% def fibonacci(n):
+%     a = 0
+%     b = 1
+%     temp = 0
+%     for i in range(1, (n + 1), 1):
+%         temp = (a + b)
+%         a = b
+%         b = temp
+%     return a
+
+% def sumSquares(n):
+%     s = 0
+%     for i in range(1, (n + 1), 1):
+%         s = (s + (i * i))
+%     return s
+
+% def compute(x, y, z):
+%     fact = factorial(x)
+%     fib = fibonacci(y)
+%     sq = sumSquares(z)
+%     result = ((fact + fib) + sq)
+%     return result
+
+% def main():
+%     x = 0
+%     y = 0
+%     z = 0
+%     print("Enter x: ", end='')
+%     x = int(input())
+%     print("Enter y: ", end='')
+%     y = int(input())
+%     print("Enter z: ", end='')
+%     z = int(input())
+%     print("Processing...")
+%     output = compute(x, y, z)
+%     print("Final Output = ", output)
+%     return 0
+
+% if __name__ == "__main__":
+%     main()
+% \end{lstlisting}
+
+
+
+% \end{document}
+% ============================================================
+% APPENDIX B (FULLY FIXED WITH TOC ENTRIES)
+% ============================================================
+
+\newpage
+\section*{Appendix B: Detailed Test Cases and Outputs}
+\addcontentsline{toc}{section}{Appendix B: Detailed Test Cases and Outputs}
+
+This appendix contains the full C++ input programs and their corresponding translated Python outputs. Each test case is categorized based on the type of construct it is designed to validate.
+
+% ============================================================
+% Test 1
+% ============================================================
+\subsection*{Test 1: Arithmetic Expression and Basic Output}
+\addcontentsline{toc}{subsection}{Test 1: Arithmetic Expression and Basic Output}
+
+\textbf{Category:} Arithmetic Operations, Expression Evaluation, Basic \texttt{cout} Handling
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 10;
+    int b = 20;
+    int c = a + b * 2 - 5;
+    cout << "Result: " << c << endl;
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def main():
+    a = 10
+    b = 20
+    c = ((a + (b * 2)) - 5)
+    print("Result: ", c)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 2
+% ============================================================
+\subsection*{Test 2: Conditional Statement with Logical Operators}
+\addcontentsline{toc}{subsection}{Test 2: Conditional Statement with Logical Operators}
+
+\textbf{Category:} Conditionals, Logical Operators (\texttt{&&}, \texttt{||})
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 15;
+
+    if (x > 10 && x < 20) {
+        cout << "x is between 10 and 20" << endl;
+    } else {
+        cout << "x is out of range" << endl;
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def main():
+    x = 15
+    if ((x > 10) and (x < 20)):
+        print("x is between 10 and 20")
+    else:
+        print("x is out of range")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 3
+% ============================================================
+\subsection*{Test 3: User Input Handling and Arithmetic}
+\addcontentsline{toc}{subsection}{Test 3: User Input Handling and Arithmetic}
+
+\textbf{Category:} I/O Translation (\texttt{cin}/\texttt{cout}), Arithmetic Operations
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 0;
+    int y = 0;
+    cout << "Enter x:";
+    cin >> x;
+    cout << "Enter y:";
+    cin >> y;
+    int sum = x + y;
+    int mul = x * y;
+    cout << "sum=" << sum << " mul=" << mul << endl;
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def main():
+    x = 0
+    y = 0
+    print("Enter x:", end='')
+    x = int(input())
+    print("Enter y:", end='')
+    y = int(input())
+    sum = (x + y)
+    mul = (x * y)
+    print("sum=", sum, " mul=", mul)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 4
+% ============================================================
+\subsection*{Test 4: Nested For-Loops}
+\addcontentsline{toc}{subsection}{Test 4: Nested For-Loops}
+
+\textbf{Category:} Loop Translation, Nested Loops, \texttt{for} → \texttt{range()}
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 1; i <= 3; i++) {
+        for (int j = 1; j <= 2; j++) {
+            cout << "i=" << i << " j=" << j << endl;
+        }
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def main():
+    for i in range(1, (3 + 1), 1):
+        for j in range(1, (2 + 1), 1):
+            print("i=", i, " j=", j)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 5
+% ============================================================
+\subsection*{Test 5: User-Defined Function and Function Call}
+\addcontentsline{toc}{subsection}{Test 5: User-Defined Function and Function Call}
+
+\textbf{Category:} Functions, Return Values, Function Invocation
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int x = 10;
+    int y = 20;
+    int s = add(x, y);
+    cout << "Sum=" << s << endl;
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def add(a, b):
+    return (a + b)
+
+def main():
+    x = 10
+    y = 20
+    s = add(x, y)
+    print("Sum=", s)
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 6
+% ============================================================
+\subsection*{Test 6: Boolean Function and Logical Evaluation}
+\addcontentsline{toc}{subsection}{Test 6: Boolean Function and Logical Evaluation}
+
+\textbf{Category:} Boolean Logic, Function Return Values, Complex Conditionals
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+bool check(int a, int b) {
+    if (a > 0 && b > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main() {
+    int x = 3;
+    int y = -1;
+    if (check(x, y) || x > 1) {
+        cout << "OK" << endl;
+    } else {
+        cout << "NOT OK" << endl;
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def check(a, b):
+    if ((a > 0) and (b > 0)):
+        return True
+    else:
+        return False
+
+def main():
+    x = 3
+    y = -1
+    if (check(x, y) or (x > 1)):
+        print("OK")
+    else:
+        print("NOT OK")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 7
+% ============================================================
+\subsection*{Test 7: Duplicate Case to Validate Consistency}
+\addcontentsline{toc}{subsection}{Test 7: Duplicate Case to Validate Consistency}
+
+\textbf{Category:} Regression Test, Logical Operators, Consistency Check
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+bool check(int a, int b) {
+    if (a > 0 && b > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int main() {
+    int x = 3;
+    int y = -1;
+    if (check(x, y) || x > 1) {
+        cout << "OK" << endl;
+    } else {
+        cout << "NOT OK" << endl;
+    }
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def check(a, b):
+    if ((a > 0) and (b > 0)):
+        return True
+    else:
+        return False
+
+def main():
+    x = 3
+    y = -1
+    if (check(x, y) or (x > 1)):
+        print("OK")
+    else:
+        print("NOT OK")
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+% ============================================================
+% Test 8
+% ============================================================
+\subsection*{Test 8: Multi-Function Program with Loops and Processing}
+\addcontentsline{toc}{subsection}{Test 8: Multi-Function Program with Loops and Processing}
+
+\textbf{Category:} Multi-Function Program, Loops, Arithmetic, I/O, Complex Translation
+
+\subsubsection*{Input (C++)}
+\begin{lstlisting}[language=C++]
+#include <iostream>
+using namespace std;
+
+int factorial(int n) {
+    int f = 1;
+    for (int i = 1; i < n + 1; i++) {
+        f = f + (f * (i - 1));
+    }
+    return f;
+}
+
+int fibonacci(int n) {
+    int a = 0;
+    int b = 1;
+    int temp = 0;
+    for (int i = 1; i < n + 1; i++) {
+        temp = a + b;
+        a = b;
+        b = temp;
+    }
+    return a;
+}
+
+int sumSquares(int n) {
+    int s = 0;
+    for (int i = 1; i < n + 1; i++) {
+        s = s + (i * i);
+    }
+    return s;
+}
+
+int compute(int x, int y, int z) {
+    int fact = factorial(x);
+    int fib = fibonacci(y);
+    int sq  = sumSquares(z);
+    int result = fact + fib + sq ;
+    return result;
+}
+
+int main() {
+    int x=0;
+    int y=0;
+    int z=0;
+    cout << "Enter x: ";
+    cin >> x;
+    cout << "Enter y: ";
+    cin >> y;
+    cout << "Enter z: ";
+    cin >> z;
+    cout << "Processing..." << endl;
+    int output = compute(x, y, z);
+    cout << "Final Output = " << output << endl;
+}
+\end{lstlisting}
+
+\subsubsection*{Output (Python)}
+\begin{lstlisting}[language=Python]
+def factorial(n):
+    f = 1
+    for i in range(1, (n + 1), 1):
+        f = (f + (f * (i - 1)))
+    return f
+
+def fibonacci(n):
+    a = 0
+    b = 1
+    temp = 0
+    for i in range(1, (n + 1), 1):
+        temp = (a + b)
+        a = b
+        b = temp
+    return a
+
+def sumSquares(n):
+    s = 0
+    for i in range(1, (n + 1), 1):
+        s = (s + (i * i))
+    return s
+
+def compute(x, y, z):
+    fact = factorial(x)
+    fib = fibonacci(y)
+    sq = sumSquares(z)
+    result = ((fact + fib) + sq)
+    return result
+
+def main():
+    x = 0
+    y = 0
+    z = 0
+    print("Enter x: ", end='')
+    x = int(input())
+    print("Enter y: ", end='')
+    y = int(input())
+    print("Enter z: ", end='')
+    z = int(input())
+    print("Processing...")
+    output = compute(x, y, z)
+    print("Final Output = ", output)
+    return 0
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+\end{document}

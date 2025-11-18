@@ -1,8 +1,8 @@
 def main():
         a = 10
-        b = 5.5
-        print("a:", a, " b:", b)
-        return 0
+        b = 20
+        c = ((a + (b * 2)) - 5)
+        print("Result: ", c)
 
 
 if __name__ == "__main__":

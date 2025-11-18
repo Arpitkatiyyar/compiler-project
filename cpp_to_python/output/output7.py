@@ -1,12 +1,7 @@
-def add(a, b):
-        return (a + b)
-
 def main():
-        x = 5
-        y = 7
-        result = add(x, y)
-        print("result=", result)
-        return 0
+        i = 5
+        for i in range(5, (1 - 1), -1):
+                    print("countdown: ", i)
 
 
 if __name__ == "__main__":

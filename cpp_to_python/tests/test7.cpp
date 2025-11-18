@@ -1,16 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int add(int a, int b) {
-    return a + b;
-}
-
 int main() {
-    int x = 5;
-    int y = 7;
-    int result = add(x, y);
+    int i = 5;
 
-    cout << "result=" << result << endl;
+    for (i = 5; i >= 1; i--) {
+        cout << "countdown: " << i << endl;
+    }
 
-    return 0;
 }

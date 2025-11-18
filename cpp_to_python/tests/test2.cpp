@@ -2,19 +2,12 @@
 using namespace std;
 
 int main() {
-    int x = 0;
-    int y = 0;
+    int x = 15;
 
-    cout << "Enter x:";
-    cin >> x;
+    if (x > 10 && x < 20) {
+        cout << "x is between 10 and 20" << endl;
+    } else {
+        cout << "x is out of range" << endl;
+    }
 
-    cout << "Enter y:";
-    cin >> y;
-
-    int sum = x + y;
-    int mul = x * y;
-
-    cout << "sum=" << sum << " mul=" << mul << endl;
-
-    return 0;
 }

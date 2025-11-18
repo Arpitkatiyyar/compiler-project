@@ -2,9 +2,7 @@ import ply.yacc as yacc
 from lexer import tokens
 from ast_nodes import *
 
-# ------------------------------
 # Precedence rules
-# ------------------------------
 precedence = (
     ('left', 'LOR'),
     ('left', 'LAND'),
@@ -16,9 +14,7 @@ precedence = (
     ('right', 'UMINUS'),
 )
 
-# ------------------------------
 # Program structure
-# ------------------------------
 def p_program(p):
     '''program : external_list'''
     p[0] = ProgramNode(p[1])
@@ -38,9 +34,7 @@ def p_external(p):
                 | main_function'''
     p[0] = p[1]
 
-# ------------------------------
 # includes / using namespace
-# ------------------------------
 def p_includes(p):
     '''includes : INCLUDE'''
     p[0] = None
@@ -50,9 +44,7 @@ def p_using_namespace(p):
                        | empty'''
     p[0] = None
 
-# ------------------------------
 # Function definitions
-# ------------------------------
 def p_function_def(p):
     '''function_def : type ID LPAREN param_list RPAREN block'''
     p[0] = FunctionNode(p[1], p[2], p[4], p[6])
@@ -75,9 +67,7 @@ def p_param(p):
     '''param : type ID'''
     p[0] = ParamNode(p[1], p[2])
 
-# ------------------------------
 # Types
-# ------------------------------
 def p_type(p):
     '''type : INT
             | FLOAT
@@ -88,9 +78,7 @@ def p_type(p):
             | VOID'''
     p[0] = p.slice[1].type
 
-# ------------------------------
 # Block / Statement list
-# ------------------------------
 def p_block(p):
     'block : LBRACE statement_list RBRACE'
     p[0] = BlockNode(p[2])
@@ -112,9 +100,7 @@ def p_statement(p):
                  | block'''
     p[0] = p[1]
 
-# ------------------------------
 # Variable declaration
-# ------------------------------
 def p_declaration(p):
     '''declaration : type ID ASSIGN expression
                    | type ID ASSIGN STRING_LITERAL'''
@@ -125,9 +111,7 @@ def p_declaration(p):
         val = StringNode(val)
     p[0] = DeclarationNode(typ, name, val)
 
-# ------------------------------
 # Assignments
-# ------------------------------
 def p_assignment_basic(p):
     'assignment : ID ASSIGN expression'
     p[0] = AssignNode(p[1], p[3])
@@ -149,9 +133,7 @@ def p_assignment_dec(p):
     p[0] = AssignNode(p[1], BinOpNode('-', VarNode(p[1]), NumNode(1)))
 
 
-# ------------------------------
 # cout << printing
-# ------------------------------
 def p_print_stmt(p):
     'print_stmt : COUT print_tail'
     p[0] = PrintNode(p[2])
@@ -164,9 +146,7 @@ def p_print_tail_chain(p):
     'print_tail : print_tail SHL expression'
     p[0] = p[1] + [p[3]]
 
-# ------------------------------
 # cin >> input
-# ------------------------------
 def p_input_stmt(p):
     'input_stmt : CIN input_tail'
     p[0] = InputNode(p[2])
@@ -179,9 +159,7 @@ def p_input_tail_chain(p):
     'input_tail : input_tail SHR ID'
     p[0] = p[1] + [p[3]]
 
-# ------------------------------
 # if / while / for
-# ------------------------------
 def p_if_stmt(p):
     '''if_stmt : IF LPAREN expression RPAREN statement
                | IF LPAREN expression RPAREN statement ELSE statement'''
@@ -200,9 +178,7 @@ def p_for_stmt_assign(p):
     '''for_stmt : FOR LPAREN assignment SEMICOLON expression SEMICOLON assignment RPAREN statement'''
     p[0] = ForNode(p[3], p[5], p[7], p[9])
 
-# ------------------------------
 # return
-# ------------------------------
 def p_return_stmt_val(p):
     'return_stmt : RETURN expression'
     p[0] = ReturnNode(p[2])
@@ -211,9 +187,7 @@ def p_return_stmt_empty(p):
     'return_stmt : RETURN'
     p[0] = ReturnNode(None)
 
-# ------------------------------
 # Expressions
-# ------------------------------
 def p_expression_binop(p):
     '''expression : expression PLUS expression
                   | expression MINUS expression
@@ -273,16 +247,12 @@ def p_expression_paren(p):
     'expression : LPAREN expression RPAREN'
     p[0] = p[2]
 
-# ------------------------------
 # Empty
-# ------------------------------
 def p_empty(p):
     'empty :'
     pass
 
-# ------------------------------
 # Error
-# ------------------------------
 def p_error(p):
     if p:
         print(f"Syntax error at '{p.value}' (line {p.lineno})")

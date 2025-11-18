@@ -1,8 +1,16 @@
+def check(a, b):
+        if ((a > 0) and (b > 0)):
+                    return True
+        else:
+                    return False
+
 def main():
-        for i in range(1, 4, 1):
-                    for j in range(1, 3, 1):
-                                    print("i=", i, " j=", j)
-        return 0
+        x = 3
+        y = (-1)
+        if (check(x, y) or (x > 1)):
+                    print("OK")
+        else:
+                    print("NOT OK")
 
 
 if __name__ == "__main__":

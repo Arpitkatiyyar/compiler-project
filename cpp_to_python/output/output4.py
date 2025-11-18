@@ -1,10 +1,8 @@
 def main():
-        n = 3
-        i = 0
-        while (i < n):
+        i = 1
+        while (i <= 5):
                     print("i=", i)
                     i = (i + 1)
-        return 0
 
 
 if __name__ == "__main__":

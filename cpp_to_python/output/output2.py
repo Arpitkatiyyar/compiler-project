@@ -1,14 +1,9 @@
 def main():
-        x = 0
-        y = 0
-        print("Enter x:", end='')
-        x = int(input())
-        print("Enter y:", end='')
-        y = int(input())
-        sum = (x + y)
-        mul = (x * y)
-        print("sum=", sum, " mul=", mul)
-        return 0
+        x = 15
+        if ((x > 10) and (x < 20)):
+                    print("x is between 10 and 20")
+        else:
+                    print("x is out of range")
 
 
 if __name__ == "__main__":

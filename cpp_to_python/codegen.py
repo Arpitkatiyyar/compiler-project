@@ -3,15 +3,13 @@ from ast_nodes import *
 class CodeGenerator:
     def __init__(self):
         self.indent_level = 0
-        self.symtab = {}           # name -> type (INT/FLOAT/STRING/etc.)
-        self.functions = []        # store all function definitions
+        self.symtab = {}           
+        self.functions = []        
 
     def indent(self):
         return "    " * self.indent_level
 
-    # -----------------------------------------
-    # Top-level dispatcher
-    # -----------------------------------------
+    # Top Level Dispatcher
     def generate(self, node):
         if node is None:
             return ""
@@ -20,14 +18,13 @@ class CodeGenerator:
         if isinstance(node, ProgramNode):
             parts = []
             for d in node.declarations:
-                if d is None:
-                    continue
-                parts.append(self.generate(d))
+                if d:
+                    parts.append(self.generate(d))
 
-            # auto main() call
+            # auto-add main() runner
             if any(isinstance(d, FunctionNode) and d.name == "main"
                    for d in node.declarations):
-                parts.append("\nif __name__ == \"__main__\":\n    main()")
+                parts.append('\nif __name__ == "__main__":\n    main()')
 
             return "\n\n".join(parts)
 
@@ -35,12 +32,10 @@ class CodeGenerator:
         elif isinstance(node, FunctionNode):
             params = ", ".join(p.name for p in node.params)
             header = f"def {node.name}({params}):"
-            self.indent_level += 1
 
-            # Save old symtab (function scope)
+            self.indent_level += 1
             saved = self.symtab.copy()
 
-            # parameters must be recorded
             for p in node.params:
                 self.symtab[p.name] = p.type_name
 
@@ -57,8 +52,9 @@ class CodeGenerator:
 
             for stmt in node.statements:
                 g = self.generate(stmt)
-                if g is None:
+                if not g:
                     continue
+
                 for line in g.splitlines():
                     if line.strip() == "":
                         lines.append("")
@@ -97,7 +93,6 @@ class CodeGenerator:
             if had_endl:
                 return f"print({', '.join(parts)})"
 
-            # cout without newline
             if parts:
                 return f"print({', '.join(parts)}, end='')"
             else:
@@ -137,7 +132,7 @@ class CodeGenerator:
                 return "return"
             return f"return {self.generate(node.expr)}"
 
-        # ------------------ CALL ------------------
+        # ------------------ FUNCTION CALL ------------------
         elif isinstance(node, CallNode):
             args = ", ".join(self.generate(a) for a in node.args)
             return f"{node.name}({args})"
@@ -171,89 +166,85 @@ class CodeGenerator:
             esc = node.value.replace('"', '\\"')
             return f"\"{esc}\""
 
-        else:
-            return f"# Unsupported node {node}"
+        return f"# Unsupported node {node}"
 
-    # -----------------------------------------
-    # FOR loop → Python range() or fallback
-    # -----------------------------------------
+    #           FULLY UPDATED FOR LOOP GENERATOR
     def generate_for(self, node):
         init = node.init
         cond = node.cond
         incr = node.incr
         body = node.body
 
-        # Detect variable name
+        # ----------- init -----------
         if isinstance(init, DeclarationNode):
             var = init.name
-            start = init.value.value if isinstance(init.value, NumNode) else None
+            start = self.generate(init.value)
         elif isinstance(init, AssignNode):
             var = init.name
-            start = init.value.value if isinstance(init.value, NumNode) else None
+            start = self.generate(init.value)
         else:
             return self.generate_fallback_for(node)
 
-        # Detect condition
+        # ----------- condition -----------
         if not isinstance(cond, BinOpNode):
             return self.generate_fallback_for(node)
+
         if not isinstance(cond.left, VarNode) or cond.left.name != var:
             return self.generate_fallback_for(node)
 
-        # Extract stop value
-        if isinstance(cond.right, NumNode):
-            stop = cond.right.value
-        else:
-            return self.generate_fallback_for(node)
+        op = cond.op
+        stop = self.generate(cond.right)  
 
-        # Detect increment
-        step = 1
+        # adjust <= and >=
+        if op == "<=":
+            stop = f"({stop} + 1)"
+        elif op == ">=":
+            stop = f"({stop} - 1)"
+
+        # ----------- step detection -----------
+        step = "1"
+
         if isinstance(incr, AssignNode) and isinstance(incr.value, BinOpNode):
-            op = incr.value.op
-            if isinstance(incr.value.right, NumNode):
-                val = incr.value.right.value
-                if op == "+":
-                    step = val
-                elif op == "-":
-                    step = -val
+            incop = incr.value.op
+            val = self.generate(incr.value.right)
 
-        # Adjust stop for <=
-        if cond.op == "<=" and isinstance(stop, int):
-            stop = stop + 1
+            if incop == "+":
+                step = val
+            elif incop == "-":
+                step = f"-{val}"
 
-        # For > or >=, ensure step is negative
-        if cond.op in (">", ">=") and step > 0:
-            step = -step
-        if cond.op == ">=" and isinstance(stop, int):
-            stop = stop - 1
+        # If loop is descending
+        if op in (">", ">=") and not step.startswith("-"):
+            step = "-" + step
 
-        # Build range loop
+        # ----------- Build final Python loop -----------
         loop = f"for {var} in range({start}, {stop}, {step}):\n"
         loop += self.generate(body)
         return loop
 
-    # fallback → while loop form
+    # fallback → while loop 
     def generate_fallback_for(self, node):
-        init = self.generate(node.init)
-        condition = self.generate(node.cond)
-        body = self.generate(node.body)
-        incr = self.generate(node.incr)
+        init_code = self.generate(node.init)
+        cond_code = self.generate(node.cond)
+        incr_code = self.generate(node.incr)
+        body_code = self.generate(node.body)
 
-        result = init + "\n"
-        result += f"while {condition}:\n"
+        result = init_code + "\n"
+        result += f"while {cond_code}:\n"
+
         self.indent_level += 1
-        for line in body.splitlines():
+        for line in body_code.splitlines():
             result += self.indent() + line + "\n"
-        result += self.indent() + incr + "\n"
+        result += self.indent() + incr_code + "\n"
         self.indent_level -= 1
+
         return result
 
 
-# -------------------------------------------------
 # Manual tester
-# -------------------------------------------------
 if __name__ == "__main__":
     from parser import parser
-    with open("test.cpp", "r", encoding="utf-8") as f:
+    with open(input("File location: "), "r", encoding="utf-8") as f:
         data = f.read()
 
     ast = parser.parse(data)

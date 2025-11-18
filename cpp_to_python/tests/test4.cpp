@@ -2,13 +2,11 @@
 using namespace std;
 
 int main() {
-    int n = 3;
-    int i = 0;
+    int i = 1;
 
-    while (i < n) {
+    while (i <= 5) {
         cout << "i=" << i << endl;
         i++;
     }
 
-    return 0;
 }

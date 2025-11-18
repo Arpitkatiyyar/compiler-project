@@ -2,13 +2,18 @@
 using namespace std;
 
 int main() {
-    int age = 20;
+    int x = 0;
+    int y = 0;
 
-    if (age >= 18) {
-        cout << "Adult" << endl;
-    } else {
-        cout << "Minor" << endl;
-    }
+    cout << "Enter x:";
+    cin >> x;
 
-    return 0;
+    cout << "Enter y:";
+    cin >> y;
+
+    int sum = x + y;
+    int mul = x * y;
+
+    cout << "sum=" << sum << " mul=" << mul << endl;
+
 }
